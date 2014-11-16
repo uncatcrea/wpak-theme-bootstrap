@@ -103,15 +103,17 @@ body {
 }
 
 .header h1 {
-	margin:0;
-	padding:1px 50px 0px 50px;
+	/*padding:5px 50px 5px 50px;*/
+/*
 	text-align:center;
 	line-height:50px;
 	overflow:hidden;
-	height:50px;
+*/
+
+/*
 	font-weight:normal;
-	-webkit-user-select:none; /* Block selection with a long touch */
 	font-size:18px;
+*/
 }
 
 /* Menu */

@@ -1,15 +1,21 @@
 .list-template .list-title {
-	background-color:#00A2D3;
-	/*margin:0 0 15px 0;*/ /* A reporter dans le tutoriel + tester sous iOS */
+	background-color:#3ea8ec;
+	color:#fff;
+	text-align:center;
+	font-size:35px;
+    font-weight:600;
+	padding:11px 0 9px 0;
 }
 
 .list-template .list-title div {
+/*
 	text-align:center;
 	font-size:24px;
 	padding:10px 0 0 0;
 	background-color:#fff;
 	width:60%;
 	margin:auto;
+*/
 }
 
 .list-template a {

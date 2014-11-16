@@ -4,8 +4,11 @@ body {
 }
 
 .header {
-	background-color:#F8F8F8;
-	border-bottom:1px #B2B2B2 solid;}
+	background-color: #000;
+    color: #fff;
+    box-shadow: 0px 5px 3px 0px #030117;
+	/*border-bottom:1px #B2B2B2 solid;*/
+}
 
 .message {
 	background-color:#ff5555;
@@ -34,6 +37,13 @@ body {
 
 .header h1 {
 	font-family:HelveticaNeue-Medium,sans-serif;
+    background-image: url(../img/header-wp-marmite-black.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size:contain;
+	margin:auto;
+    margin-top:12px;
+	height:30px;
 }
 
 /* Post List */
