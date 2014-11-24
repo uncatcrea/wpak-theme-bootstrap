@@ -1,0 +1,21 @@
+<div id="tab-bar" class="row tab-bar">
+
+    <% if(menu_items.length){ %>
+    
+        <% for (tabOrder=0;tabOrder<5;tabOrder++) { %>
+
+            <% if(tabOrder==0){ %>
+                
+                <a href="<%= menu_items[tabOrder].link %>" class="tab <%= menu_items[tabOrder].icon_slug %>-icon-on"><%= menu_items[tabOrder].label %></a>
+
+            <% }else{ %>
+                
+                <a href="<%= menu_items[tabOrder].link %>" class="tab <%= menu_items[tabOrder].icon_slug %>-icon-off"><%= menu_items[tabOrder].label %></a>
+
+            <% } %>
+                
+        <% } %>
+            
+    <% } %>
+        
+</div>
