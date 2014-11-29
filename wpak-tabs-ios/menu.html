@@ -1,21 +1,33 @@
 <div id="tab-bar" class="row tab-bar">
 
-    <% if(menu_items.length){ %>
+    <% 
+        var menu_items = TemplateTags.getMenuItems();
+        var menu_item_id = "";
+        var menu_item_rank = 0;
+        
+        if(menu_items.length){ 
+    %>
     
         <% for (tabOrder=0;tabOrder<5;tabOrder++) { %>
 
+            <%
+               
+               menu_item_rank = tabOrder+1
+               menu_item_id = "tab-" + menu_item_rank;
+               
+            %>
+        
             <% if(tabOrder==0){ %>
                 
-                <a href="<%= menu_items[tabOrder].link %>" class="tab <%= menu_items[tabOrder].icon_slug %>-icon-on"><%= menu_items[tabOrder].label %></a>
+                <a href="<%= menu_items[tabOrder].link %>" id="<%= menu_item_id %>" class="tab <%= menu_item_id %>-icon-on-"><%= menu_items[tabOrder].label %></a>
 
             <% }else{ %>
                 
-                <a href="<%= menu_items[tabOrder].link %>" class="tab <%= menu_items[tabOrder].icon_slug %>-icon-off"><%= menu_items[tabOrder].label %></a>
+                <a href="<%= menu_items[tabOrder].link %>" id="<%= menu_item_id %>" class="tab <%= menu_item_id %>-icon-off-"><%= menu_items[tabOrder].label %></a>
 
             <% } %>
                 
         <% } %>
             
     <% } %>
-        
 </div>

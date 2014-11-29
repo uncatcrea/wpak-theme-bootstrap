@@ -192,7 +192,12 @@ define(['jquery','core/theme-app','core/lib/storage','core/theme-tpl-tags','them
         App.navigate(TplTags.getPreviousScreenLink());
 	}
 
-    function tabTap(){
+    function tabTap(event){
+        event.stopPropagation();
+        
+        resetTabIcons();
+        setActiveTab($(this));
+        
         App.navigate($(this).attr("href"));
     }
     
@@ -225,6 +230,37 @@ define(['jquery','core/theme-app','core/lib/storage','core/theme-tpl-tags','them
     function hideTabBar(){
         $("#tab-bar").css("display","none");
         $("#content").css("bottom","0px");        
+    }
+    
+    function resetTabIcons(){
+
+        var menuItems = $(".tab");
+        var tabClassName = "";
+        var tabOrder = 0;
+
+        //debugger;
+
+        for (i=0;i<5;i++){
+            
+            if ($(menuItems[i]).attr("class").indexOf("-on-") != -1) {
+                
+                tabOrder = i + 1;
+                tabClassName = "tab-" + tabOrder + "-icon";
+                
+                $(menuItems[i]).removeClass(tabClassName + "-on-").addClass(tabClassName + "-off-");
+            
+            }
+            
+        }
+        
+    }
+    
+    function setActiveTab(tabToBeActivated) {
+    
+        var tabOrder = tabToBeActivated.attr("id").substr(4,1);
+        var tabClassName = "tab-" + tabOrder + "-icon";
+        tabToBeActivated.removeClass(tabClassName + "-off-").addClass(tabClassName + "-on-");
+        
     }
     
 });

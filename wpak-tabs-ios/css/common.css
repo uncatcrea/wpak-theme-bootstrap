@@ -112,53 +112,57 @@ body {
     background-size: 50% 50%;
     font-family:HelveticaNeue,sans-serif;
     font-size:8px;
-    color:#b2b2b2;
     text-align: center;
     padding-top: 37px;
     text-decoration: none;
 }
 
-.tab-1-icon-off {
+.tab-1-icon-off- {
     background-image:url(../img/tab-1-off-icon.svg);
+    color:#b2b2b2;
 }
 
-.tab-1-icon-on {
+.tab-1-icon-on- {
     background-image:url(../img/tab-1-on-icon.svg);
     color:#007aff;
 }
 
-.tab-2-icon-off {
+.tab-2-icon-off- {
     background-image:url(../img/tab-2-off-icon.svg);
+    color:#b2b2b2;
 }
 
-.tab-2-icon-on {
+.tab-2-icon-on- {
     background-image:url(../img/tab-2-on-icon.svg);
     color:#007aff;
 }
 
-.tab-3-icon-off {
+.tab-3-icon-off- {
     background-image:url(../img/tab-3-off-icon.svg);
+    color:#b2b2b2;
 }
 
-.tab-3-icon-on {
+.tab-3-icon-on- {
     background-image:url(../img/tab-3-on-icon.svg);
     color:#007aff;
 }
 
-.tab-4-icon-off {
+.tab-4-icon-off- {
     background-image:url(../img/tab-4-off-icon.svg);
+    color:#b2b2b2;
 }
 
-.tab-4-icon-on {
+.tab-4-icon-on- {
     background-image:url(../img/tab-4-on-icon.svg);
     color:#007aff;
 }
 
-.tab-5-icon-off {
+.tab-5-icon-off- {
     background-image:url(../img/tab-5-off-icon.svg);
+    color:#b2b2b2;
 }
 
-.tab-5-icon-on {
+.tab-5-icon-on- {
     background-image:url(../img/tab-5-on-icon.svg);
     color:#007aff;
 }
