@@ -151,12 +151,19 @@
 
 /* Images */
 
-.single-content .content-image img {
-	width:100%;
+/* .wp-image class is auto-added with PHP */
+.single-content img.wp-image {
+    max-width:100%;
+    width:auto;
 	height:auto;
-	display:block; /* Done to suppress the padding-bottom bug */
+    margin:auto;
 }
 
+.single-content img:not(.wp-smiley) { /* Smileys should remain inline */
+    display:block; /* Done to suppress the padding-bottom bug and handle external images */
+}
+
+/*
 .single-content .content-image .wp-caption-text {
 	font-size:12px;
 	line-height:14px;
@@ -164,6 +171,7 @@
 	margin:5px 2px 20px 2px;
 	text-align:justify;
 }
+*/
 
 /* Post Meta */
 

@@ -119,7 +119,7 @@ define(['jquery','core/theme-app','core/lib/storage','core/theme-tpl-tags','them
         StatusBar.styleDefault();
         StatusBar.backgroundColorByHexString("#F8F8F8");
     } catch(e) {
-        alert("StatusBar plugin not available");
+        console.log("StatusBar plugin not available");
         // https://build.phonegap.com/plugins/715
     }
 
