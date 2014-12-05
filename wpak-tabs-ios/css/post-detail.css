@@ -153,7 +153,7 @@
 
 .single-content .content-image img {
 	max-width:100%;
-    width:auto;
+    width:100%;
 	height:auto;
 	display:block;
 }

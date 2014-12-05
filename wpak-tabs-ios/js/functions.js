@@ -1,83 +1,103 @@
-define(['jquery','core/theme-app','core/lib/storage','core/theme-tpl-tags','theme/js/jquery.velocity.min'],function($,App,Storage,TplTags){
+/**
+ * All JavaScript required for the theme has to be placed in this file
+ * Use RequireJS define to import external JavaScript libraries
+ * To be imported, a JavaScript has to be a module (AMD)
+ * http://www.sitepoint.com/understanding-requirejs-for-effective-javascript-module-loading/
+ * If this is not the case: place the path to the library at the end of the define array
+ * Paths are relative to the app subfolder of the wp-app-kit plugin folder
+ * You don't need to specify the .js extensions
+    
+ * (AMD) jQuery          available as    $
+ * (AMD) Theme App Core  available as    App
+ * (AMD) Local Storage   available as    Storage
+ * (AMD) Template Tags   avaialble as    TplTags
+ */
+define(['jquery','core/theme-app','core/lib/storage','core/theme-tpl-tags'],function($,App,Storage,TplTags){
+    
+	/**
+     * App Events
+     */
 
-	/* App Events */
-
-    // Refresh process begins
+    // @desc Refresh process begins
     App.on('refresh:start',function(){
 
-        // the refresh button begins to spin
+        // The refresh icon begins to spin
         $("#refresh-button").removeClass("refresh-off").addClass("refresh-on");
 
     });
 
-    // Refresh process ends
+    /**
+     * @desc Refresh process ends
+     * @param result
+     */
     App.on('refresh:end',function(result){
 
-		// Reset scroll position
-        scrollTop();
-        Storage.clear('scroll-pos'); 
+        scrollTop();                    // Scroll to the top of the screen
+        Storage.clear('scroll-pos');    // Clear the previous memorized position in the local storage
         
-		// Stop spinnning for the refresh button
+		// The refresh icon stops to spin
         $("#refresh-button").removeClass("refresh-on").addClass("refresh-off");
 
-		// Display if the refresh process has worked or not
-        // TODO : if an errors occurs we should not reset scroll position
+		/**
+         * Display if the refresh process is a success or not
+         * @todo if an error occurs we should not reset scroll position
+         * @todo messages should be centralized to ease translations
+         */
         if ( result.ok ) {
-			showMessage("Content updated successfully :)");            
+			showMessage("Content updated successfully :)"); // Refresh is a success
 		}else{
-			showMessage(result.message);
+			showMessage(result.message); // Refresh has failed
 		}
 
 	});
 
-	// Error occurs
+	/**
+     * @desc An error occurs
+     * @param error
+     */
     App.on('error',function(error){
 
-        // Display error message
-        showMessage(error.message);
+        showMessage(error.message); // Display error message
 
     });
 
-	// A new screen is displayed
+	/**
+     * @desc A new screen is displayed
+     * @param {object} current_screen - Screen types: list|single|page|comments
+     * @param view
+     */
     App.on('screen:showed',function(current_screen,view){
-        //current_screen.screen_type can be 'list','single','page','comments'
         
-		// iOS back button support
+		// Check if iOS back button has to be displayed
         if (TplTags.displayBackButton()) {
-			
-            // Display iOS back button
-            $("#back-button").css("display","block");
+
+            $("#back-button").css("display","block"); // Display iOS Back Button
 		
         } else {
-			
-            // Display the menu button as iOS back button is not supported
-            $("#back-button").css("display","none");
+
+            $("#back-button").css("display","none"); // Hide iOS Back Button
 
         }
 
-		// A post or a page is displayed
+		// A Post or a Page is displayed
         if (current_screen.screen_type=="single"||current_screen.screen_type=="page") {
 			
-            // Hide Tab bar
-            hideTabBar();
-            
-            // Prepare <img> tags for styling
-            cleanImgTag();
-            
-            // Redirect all hyperlinks clicks
-            $("#app-layout").on("click",".single-template a",openInBrowser);
+            hideTabBar(); // Hide Tab Bar
+            cleanImgTag(); // Prepare <img> tags for styling
+            $("#app-layout").on("click",".single-template a",openInBrowser); // Redirect all hyperlinks clicks
 
         }
 
-		// A post list is displayed
+		// A Post List is displayed
         if( current_screen.screen_type == "list" ){
-			
-            // Display tab bar
-            displayTabBar();
+
+            displayTabBar(); // Display Tab Bar
             
-            // Retrieve any memorized scroll position
-            // If a position has been memorized, scroll to it
-            // If not, scroll to the top of the screen
+            /**
+             * Retrieve any memorized scroll position from the local storage
+             * If a position has been memorized, scroll to it
+             * If not, scroll to the top of the screen
+             */
             var pos = Storage.get("scroll-pos",current_screen.fragment);
 			if( pos !== null ){
 				$("#content").scrollTop(pos);
@@ -85,160 +105,188 @@ define(['jquery','core/theme-app','core/lib/storage','core/theme-tpl-tags','them
 				scrollTop();
 			}
 		}else{
-			scrollTop();
+			scrollTop(); // Scroll to the top of screen if we're not displaying a Post List (eg. a Post)
 		}
         
 	});
 
-    // About to change the current screen
+    /**
+     * @desc About to leave the current screen
+     * @param {object} current_screen - Screen types: list|single|page|comments
+     * @param queried_screen
+     * @param view
+     */
 	App.on('screen:leave',function(current_screen,queried_screen,view){
-		//current_screen.screen_type can be 'list','single','page','comments'
 		
-        // If the current screen is a list
-        // Memorize the current scroll position
+        // If the current screen is a Post List
         if( current_screen.screen_type == "list" ){
-			Storage.set("scroll-pos",current_screen.fragment,$("#content").scrollTop());
+			Storage.set("scroll-pos",current_screen.fragment,$("#content").scrollTop()); // Memorize the current scroll position in local storage
 		}
         
 	});
-    
-    /* PhoneGap Plugins Support */
-    
-    // Status Bar
-     try {
-        StatusBar.overlaysWebView(false);
-        StatusBar.styleDefault();
-        StatusBar.backgroundColorByHexString("#F8F8F8");
-    } catch(e) {
-        console.log("StatusBar plugin not available");
-        // https://build.phonegap.com/plugins/715
-    }
 
-    // InApp Browser
+
     
-	/* UI Events */
+	/**
+     * UI Events
+     */
     
     // Event bindings
-
-	$("#app-layout").on("touchstart","#refresh-button",refreshTapOn);
+    // All events are bound to #app-layout using event delegation as it is a permanent DOM element
+    // They became available as soon as the target element is available in the DOM
+	
+    // Refresh Button events
+    $("#app-layout").on("touchstart","#refresh-button",refreshTapOn);
 	$("#app-layout").on("touchend","#refresh-button",refreshTapOff);
-
-	$("#app-layout").on("touchstart","#back-button",backButtonTapOn);
+	
+    // Back Button events
+    $("#app-layout").on("touchstart","#back-button",backButtonTapOn);
     $("#app-layout").on("touchend","#back-button",backButtonTapOff);
-
+    
+    // Tab Bar events
     $("#app-layout").on("click","#tab-bar .tab",tabTap);
-    
-	$("#app-layout").on("click","#content .content-item a",contentItemTap);
-    
-    /* Functions */
+	
+    // Post List events
+    $("#app-layout").on("click","#content .content-item a",contentItemTap);
 
-	// Finger presses an item in a list
+    
+    
+    /**
+     * Functions
+     */
+
+    /**
+     * @desc Finger presses an item in a list
+     * @todo use e.preventDefault()
+     */
     function contentItemTap() {
 
-        // Change the current screen
-        App.navigate($(this).attr("href"));
+        App.navigate($(this).attr("href")); // Change the current screen
 		return false;
-	}
 
-	// Display success/failure message
+    }
+
+    /**
+     * @desc Display success/failure message
+     * @param {string} msgText - Message to be displayed
+     * @todo rename the #refresh-message as #banner-message
+     */
     function showMessage(msgText) {
-		$("#refresh-message").html(msgText);
-		$("#refresh-message").removeClass("message-off").addClass("message-on");
-		setTimeout(hideMessage,3000);
+		$("#refresh-message").html(msgText); // Fill the message banner with the text
+		$("#refresh-message").removeClass("message-off").addClass("message-on"); // Display the message banner
+		setTimeout(hideMessage,3000); // Hide the message banner after 3 sec
 	}
 
-	// Hide success/failure message
+    /**
+     * @desc Hide success/failure message
+     * @todo rename the #refresh-message as #banner-message
+     */
     function hideMessage() {
-		$("#refresh-message").removeClass("message-on").addClass("message-off");	
-		$("#refresh-message").html("");
+		$("#refresh-message").removeClass("message-on").addClass("message-off"); // Hide the message banner
+		$("#refresh-message").html(""); // Erase the message banner
 	}
 
-	// Finger presses refresh button (1/2)
+    /**
+     * @desc Finger presses Refresh Button
+     */
     function refreshTapOn() {
 		$("#refresh-button").removeClass("button-touch-off").addClass("button-touch-on");
 	}
 
-	// Finger unpresses refresh button (2/2)
+    /**
+     * @desc Finger unpresses Refresh Button
+     * @todo Give the ability to stop the refresh manually
+     */
     function refreshTapOff() {
-		
-        // TODO : give the ability to stop the refresh manually
-        
+
         // Check if app's refreshing
         if (!App.isRefreshing()) {
-			$("#refresh-button").removeClass("button-touch-on").addClass("button-touch-off");
+		
+            $("#refresh-button").removeClass("button-touch-on").addClass("button-touch-off");
 			$("#refresh-button").removeClass("refresh-off").addClass("refresh-on");
-			
-            // Start the refresh process
-            App.refresh();
+            App.refresh(); // Start the refresh process
+            
 		}
 	
     }
 
-	// Stop refresh button animation when refresh ends
+    /**
+     * @desc Stop refresh button animation when refresh ends
+     */
     function stopRefresh() {
-		$("#refresh-button").removeClass("refresh-on").addClass("refresh-off");	
-	}
-
-	// Finger presses iOS back button (1/2)
-    function backButtonTapOn() {
-		$("#back-button").removeClass("button-tap-off").addClass("button-tap-on");
-	}
-
-	// Finger unpresses iOS back button (2/2)
-    function backButtonTapOff() {
-		$("#back-button").removeClass("button-tap-on").addClass("button-tap-off");
-		
-        // Go back to the previous screen
-        App.navigate(TplTags.getPreviousScreenLink());
-	}
-
-    function tabTap(event){
-        event.stopPropagation();
-        
-        resetTabIcons();
-        setActiveTab($(this));
-        
-        App.navigate($(this).attr("href"));
+        $("#refresh-button").removeClass("refresh-on").addClass("refresh-off");	
     }
-    
-    // Scroll to the top of the screen
-    function scrollTop(){
-		window.scrollTo(0,0);
-	}
-    
-    // Prepare <img> tags for proper styling (responsive)
-	function cleanImgTag() {
-		$(".single-template img").removeAttr("width height");
-		$(".single-template .wp-caption").removeAttr("style");
-		$(".single-template .wp-caption a").removeAttr("href");
-	}
-    
-    // Hyperlinks clicks handler
-    // Relies on the InApp Browser PhoneGap Plugin
+
+    /**
+     * @desc Finger presses iOS Back Button
+     */
+    function backButtonTapOn() {
+        $("#back-button").removeClass("button-tap-off").addClass("button-tap-on");
+    }
+
+    /**
+     * @desc Finger unpresses iOS back button
+     */
+    function backButtonTapOff() {
+
+        $("#back-button").removeClass("button-tap-on").addClass("button-tap-off");
+        App.navigate(TplTags.getPreviousScreenLink()); // Go back to the previous screen
+
+    }
+
+    /**
+     * @desc Hyperlinks clicks handler
+     * @desc Relies on the InAppBrowser PhoneGap Core Plugin / https://build.phonegap.com/plugins/233
+     * @desc target _blank calls an in app browser
+     * @desc target _system
+     * @param {object} e
+     * @todo harmonize ways of naming event object and preventDefault() position
+     */
     function openInBrowser(e) {
         window.open(e.target.href,"_blank","location=yes");
         e.preventDefault();
     }
+
+    /**
+     * @desc A tab is tapped
+     * @param {object} event
+     */
+    function tabTap(event) {
+        
+        event.stopPropagation();
+        
+        resetTabIcons(); // Switch all icons to off states
+        setActiveTab($(this)); // Switch the icon of the tapped tab to on state
+        App.navigate($(this).attr("href")); // Load the new screen
     
-    // Display tab bar
+    }
+        
+    /**
+     * @desc Display the Tab Bar
+     */
     function displayTabBar(){
         $("#tab-bar").css("display","table");
         $("#content").css("bottom","50px");
     }
     
-    // Hide tab bar
+    /**
+     * @desc Hide the Tab Bar
+     */
     function hideTabBar(){
         $("#tab-bar").css("display","none");
         $("#content").css("bottom","0px");        
     }
     
+    /**
+     * @desc Switch all tab icons to off state
+     * @todo Use the icon_slug instead of using tab index
+     * @todo Use CSS sprites (if possible with SVG images or use inline SVG with dynamic CSS styling
+     */
     function resetTabIcons(){
 
         var menuItems = $(".tab");
         var tabClassName = "";
         var tabOrder = 0;
-
-        //debugger;
 
         for (i=0;i<5;i++){
             
@@ -255,12 +303,49 @@ define(['jquery','core/theme-app','core/lib/storage','core/theme-tpl-tags','them
         
     }
     
+    /**
+     * @desc Switch a tapped tab icon to on state
+     * @param {object} tabToBeActivated
+     * @todo Use the icon_slug instead of using tab index
+     * @todo Use CSS sprites (if possible with SVG images or use inline SVG with dynamic CSS styling
+     */
     function setActiveTab(tabToBeActivated) {
     
         var tabOrder = tabToBeActivated.attr("id").substr(4,1);
         var tabClassName = "tab-" + tabOrder + "-icon";
         tabToBeActivated.removeClass(tabClassName + "-off-").addClass(tabClassName + "-on-");
         
+    }
+
+    /**
+     * @desc Scroll to the top of the screen
+     */
+    function scrollTop(){
+        $("#content").scrollTop(0);
+        
+	}
+
+    /**
+     * @desc Prepare <img> tags for proper styling (responsive)
+     */
+	function cleanImgTag() {
+		$(".single-template img").removeAttr("width height"); // Remove all width and height attributes
+		$(".single-template .wp-caption").removeAttr("style"); // Remove any style attributes
+		$(".single-template .wp-caption a").removeAttr("href"); // Remove any hyperlinks attached to an image
+	}
+    
+    /**
+     * PhoneGap Plugins Support
+     */
+
+     // Customize the iOS7 status bar with the Status Bar plugin
+     // https://build.phonegap.com/plugins/715
+     try {
+        StatusBar.overlaysWebView(false);
+        StatusBar.styleDefault();
+        StatusBar.backgroundColorByHexString("#F8F8F8");
+    } catch(e) {
+        console.log("StatusBar plugin not available");        
     }
     
 });
