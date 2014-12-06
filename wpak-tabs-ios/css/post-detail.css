@@ -1,15 +1,61 @@
-/* Containers */
+/**
+ * common.css : general rules (applied to all templates)
+ * custom.css : os specific rules (applied to all templates)
+ * post-detail.css : single.html and page.html specific rules
+ * post-list.css : archive.html specific rules
+ */
 
-/* TODO : handling default img when offline */
 
-.single-template {padding-top:0;}
+
+/**
+ * @desc Content zone
+ */
+
+.single-template {
+    padding-top:0;
+}
 
 .single-content {
 	text-align:left;
 	padding:10px 10px 0px 10px;
 }
 
-/* Text Titles */
+/**
+ * @desc Post/page title
+ */
+
+.single-template .post-title {
+	padding:0px 10px 0px 10px;
+}
+
+.single-template .post-title h1 {
+	font-size:28px;
+	line-height:36px;
+	color:#024883;
+	margin:10px 0px 0px 0px;
+}
+
+
+
+/**
+ * @desc Post/page thumbnail
+ */
+
+.single-template .post-thumbnail {
+	background:url(../img/img-icon.svg); /* Never applied as inline style got it before / @todo Apply inline style only if online */
+	background-color:#dddddd;
+	height:200px;
+	background-size:cover;
+	background-position:center center;
+	margin:0px -10px 0px -10px;
+	border-bottom:2px #00A2D3 solid;
+}
+
+
+
+/**
+ * @desc Headings
+ */
 
 .single-content h2 {
 	color:#2E2E2E;
@@ -47,7 +93,11 @@
 	margin:0px 3px 0px 3px;
 }
 
-/* Paragraphs */
+
+
+/**
+ * @desc Paragraphs
+ */
 
 .single-content p {
 	font-size:16px;
@@ -55,7 +105,11 @@
 	margin:0px 0px 20px 0px;
 }
 
-/* Emphasis */
+
+
+/**
+ * @desc Emphasis
+ */
 
 .single-content strong {
 	font-size:16px;
@@ -75,10 +129,14 @@
 	color:#2E2E2E;	
 }
 
-/* Hyperlinks */
+
+
+/**
+ * @desc Hyperlinks
+ */
 
 .single-content a {
-	-webkit-touch-callout:none;
+	-webkit-touch-callout:none;    /* Block menu on long press */
 	font-size:16px;
 	line-height:22px;	
 }
@@ -91,7 +149,11 @@
 	color:#A5BDFF;
 }
 
-/* Bullet Lists */
+
+
+/**
+ * @desc Lists
+ */
 
 .single-content ul, .single-content ol {
 	font-size:14px;
@@ -107,7 +169,11 @@
 	margin:0px 0px 10px 0px;
 }
 
-/* Blockquotes */
+
+
+/**
+ * @desc Blockquotes
+ */
 
 .single-content blockquote {
 	background-color:#00A2D3;
@@ -137,7 +203,11 @@
 	padding-left:5px;
 }
 
-/* Superscript And Subscript */
+
+
+/**
+ * @desc Superscript and subscript
+ */
 
 .single-content sup, .single-content sub {
 	font-size:10px;
@@ -149,7 +219,12 @@
 	padding:1px;
 }
 
-/* Images */
+
+
+/**
+ * @desc Images
+ * Image tags coming from WordPress are changed through PHP (see php folder) and jQuery (see functions.js)
+ */
 
 .single-content .content-image img {
 	max-width:100%;
@@ -166,7 +241,11 @@
 	text-align:justify;
 }
 
-/* Post Meta */
+
+
+/**
+ * @desc Post/page author and publish date
+ */
 
 .single-template .post-meta {
 	padding:20px 10px 10px 10px;
@@ -182,32 +261,4 @@
 
 .single-template .post-publish-date {
 	font-size:12px;
-}
-
-/* Post Excerpt */
-.single-content .post-excerpt {
-
-}
-
-/* Post Title */
-
-.single-template .post-title {
-	padding:0px 10px 0px 10px;
-}
-
-.single-template .post-thumbnail {
-	background:url(../img/img-icon.svg);  /* Never applied as inline style got it before / TODO : apply inline style only if online */
-	background-color:#dddddd;
-	height:200px;
-	background-size:cover;
-	background-position:center center;
-	margin:0px -10px 0px -10px;
-	border-bottom:2px #00A2D3 solid;
-}
-
-.single-template .post-title h1 {
-	font-size:28px;
-	line-height:36px;
-	color:#024883;
-	margin:10px 0px 0px 0px;
 }

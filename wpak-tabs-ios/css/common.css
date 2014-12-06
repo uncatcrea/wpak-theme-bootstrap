@@ -1,3 +1,16 @@
+/**
+ * common.css : general rules (applied to all templates)
+ * custom.css : os specific rules (applied to all templates)
+ * post-detail.css : single.html and page.html specific rules
+ * post-list.css : archive.html specific rules
+ */
+
+
+
+/**
+ * @desc General screen rules
+ */
+
 * {box-sizing:border-box;}
 
 html,body {
@@ -7,28 +20,59 @@ html,body {
 
 body {
 	background-color:#182C36;
-	text-rendering:optimizelegibility;
-	-webkit-text-size-adjust:none;
-	-webkit-font-smoothing:antialiased;
+	text-rendering:optimizelegibility;     /* Enable kerning and optional ligatures */
+	-webkit-text-size-adjust:100%;         /* Block text auto-scaling (eg. when switching from portrait to landscape) */
+	-webkit-font-smoothing:antialiased;    /* Enhance font aliasing */
 }
 
-/* App Structure */
+/**
+ * @desc App's structure
+ */
 
+/* Common features for header, content and tab bar elements */
+.row {
+    position:absolute;
+    overflow:hidden;
+    left:0;
+    right:0;
+}
+
+/* Used to activate vertical scroll on a zone (eg. content) */
+.scroll-y {
+    overflow-y:scroll;
+    -webkit-overflow-scrolling:touch;       /* Enable momentum scrolling and iOS rubber band */
+}
+
+/* iOS Nav Bar, Android's Action Bar */
 .header {
-    z-index: 10;
+    z-index:10;
 	height:50px;
 	text-align:center;
 }
 
+/* Zone where screen content is rendered */
 .content {
-    z-index: 10;
+    z-index:10;
 	background-color:#fff;
 	top:50px;
     bottom:50px;
 }
 
-/* Header */
+/* iOS Tab Bar, Android's Tabs */
+.tab-bar {
+    z-index:10;
+    height:50px;
+    bottom:0;
+    display:table;
+    -webkit-user-select:none;      /* Block content selection */
+	-webkit-touch-callout:none;    /* Block menu on long press */
+}
 
+/**
+ * @desc Header's elements
+ */
+
+/* Message banner */
 .message {
 	position:fixed;
 	top:50px;
@@ -42,16 +86,20 @@ body {
     z-index:20;
 }
 
+/* Message display animation */
 .message-on {
 	opacity:1;
 	-webkit-transition:opacity 0.2s linear;
 }
 
+/* Message hide animation */
 .message-off {
 	opacity:0;
 	-webkit-transition:opacity 0.2s linear;
 }
 
+
+/* Refresh icon */
 .refresh-off {
 	position:absolute;
 	right:0px;
@@ -59,110 +107,40 @@ body {
 	background-position:center;	
 }
 
+/* Refresh icon animation */
 .refresh-on {
 	position:absolute;
 	right:0px;
 	background-repeat:no-repeat;
 	background-position:center;	
-	-webkit-animation: refresh-effect 1s infinite;
+	-webkit-animation:refresh-effect 1s infinite;
 }
 
+/* Rotation effect used to animate the refresh icon */
 @-webkit-keyframes refresh-effect {
-	100%	{-webkit-transform: rotate(360deg);}
+	100% {-webkit-transform:rotate(360deg);}
 }
 
+/* App's title */
 .header h1 {
+	height:50px;
 	margin:0;
 	padding:1px 50px 0px 50px;
 	text-align:center;
-	line-height:50px;
-	overflow:hidden;
-	height:50px;
-	font-weight:normal;
-	-webkit-user-select:none; /* Block selection with a long touch */
 	font-size:18px;
+	font-weight:normal;
+	line-height:50px;
+	-webkit-user-select:none; /* Block selection with a long touch */
+	overflow:hidden;
 }
 
-.row {
-    position: absolute;
-    overflow: hidden;
-    left: 0;
-    right: 0;
-}
 
-.scroll-y {
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-}
-
-.tab-bar {
-    z-index: 10;
-    height: 50px;
-    bottom: 0;
-    display: table;
-    /*table-layout: fixed;*/
-}
+/**
+ * @desc Tab Bar
+ */
 
 .tab {
     display: table-cell;
     height: 50px;
-    width:2%;
-    background-repeat:no-repeat;
-	background-position: center 7px;
-    background-size: 50% 50%;
-    font-family:HelveticaNeue,sans-serif;
-    font-size:8px;
-    text-align: center;
-    padding-top: 37px;
-    text-decoration: none;
-}
-
-.tab-1-icon-off- {
-    background-image:url(../img/tab-1-off-icon.svg);
-    color:#b2b2b2;
-}
-
-.tab-1-icon-on- {
-    background-image:url(../img/tab-1-on-icon.svg);
-    color:#007aff;
-}
-
-.tab-2-icon-off- {
-    background-image:url(../img/tab-2-off-icon.svg);
-    color:#b2b2b2;
-}
-
-.tab-2-icon-on- {
-    background-image:url(../img/tab-2-on-icon.svg);
-    color:#007aff;
-}
-
-.tab-3-icon-off- {
-    background-image:url(../img/tab-3-off-icon.svg);
-    color:#b2b2b2;
-}
-
-.tab-3-icon-on- {
-    background-image:url(../img/tab-3-on-icon.svg);
-    color:#007aff;
-}
-
-.tab-4-icon-off- {
-    background-image:url(../img/tab-4-off-icon.svg);
-    color:#b2b2b2;
-}
-
-.tab-4-icon-on- {
-    background-image:url(../img/tab-4-on-icon.svg);
-    color:#007aff;
-}
-
-.tab-5-icon-off- {
-    background-image:url(../img/tab-5-off-icon.svg);
-    color:#b2b2b2;
-}
-
-.tab-5-icon-on- {
-    background-image:url(../img/tab-5-on-icon.svg);
-    color:#007aff;
+    width:2%; /* Width required to trigger table cell behavior */
 }

@@ -1,6 +1,15 @@
+/**
+ * common.css : general rules (applied to all templates)
+ * custom.css : os specific rules (applied to all templates)
+ * post-detail.css : single.html and page.html specific rules
+ * post-list.css : archive.html specific rules
+ */
+
+
+
+/* List title */
 .list-template .list-title {
 	background-color:#00A2D3;
-	/*margin:0 0 15px 0;*/ /* A reporter dans le tutoriel + tester sous iOS */
 }
 
 .list-template .list-title div {
@@ -12,6 +21,7 @@
 	margin:auto;
 }
 
+/* List item */
 .list-template a {
 	color:#000;
 	margin:0;
@@ -19,16 +29,24 @@
 	border-bottom:1px #AC98BA solid;
 	display:block;
 	text-decoration:none;
-	-webkit-user-select:none;
-	-webkit-touch-callout:none;
+	-webkit-user-select:none;      /* Block content selection */
+	-webkit-touch-callout:none;    /* Block menu on long press */
 	min-height:125px;
 }
 
+
+
+/**
+ * @desc List item
+ */
+
+/* Pubished date */
 .list-template .content-date {
 	font-size:12px;
 	color:#202636;
 }
 
+/* Item title */
 .list-template h2 {
 	margin:0;
 	font-size:24px;
@@ -37,11 +55,13 @@
 	line-height:29px;
 }
 
+/* Item excerpt */
 .list-template .content-excerpt {
 	font-size:14px;
 	line-height:21px;
 }
 
+/* Item thumbnail */
 .list-template .content-thumbnail {
 	float:left;
 	padding:2px;
@@ -50,7 +70,7 @@
 }
 
 .list-template .content-thumbnail div {
-	background:url(../img/img-icon.svg); /* Never applied as inline style got it before / TODO : apply inline style only if online */
+	background:url(../img/img-icon.svg); /* Never applied as inline style got it before / @todo Apply inline style only if online */
 	background-color:#dddddd;
 	background-size:cover;
 	background-position:center center;
