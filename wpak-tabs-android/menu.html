@@ -1,0 +1,33 @@
+<div id="tab-bar" class="row tab-bar">
+
+    <% 
+        var menu_items = TemplateTags.getMenuItems();
+        var menu_item_id = "";
+        var menu_item_rank = 0;
+        
+        if(menu_items.length){ 
+    %>
+    
+        <% for (tabOrder=0;tabOrder<5;tabOrder++) { %>
+
+            <%
+               
+               menu_item_rank = tabOrder+1
+               menu_item_id = "tab-" + menu_item_rank;
+               
+            %>
+        
+            <% if(tabOrder==0){ %>
+                
+                <a href="<%= menu_items[tabOrder].link %>" id="<%= menu_item_id %>" class="tab tab-on"><%= menu_items[tabOrder].label %></a>
+
+            <% }else{ %>
+                
+                <a href="<%= menu_items[tabOrder].link %>" id="<%= menu_item_id %>" class="tab tab-separator tab-off"><%= menu_items[tabOrder].label %></a>
+
+            <% } %>
+                
+        <% } %>
+            
+    <% } %>
+</div>

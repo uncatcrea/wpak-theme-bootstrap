@@ -20,6 +20,8 @@
 	padding:10px 10px 0px 10px;
 }
 
+
+
 /**
  * @desc Post/page title
  */
@@ -42,7 +44,7 @@
  */
 
 .single-template .post-thumbnail {
-	background:url(../img/img-icon.svg); /* Never applied as inline style got it before / @todo Apply inline style only if online */
+	background:url(../img/img-icon.svg);
 	background-color:#dddddd;
 	height:200px;
 	background-size:cover;
@@ -50,6 +52,7 @@
 	margin:0px -10px 0px -10px;
 	border-bottom:2px #00A2D3 solid;
 }
+
 
 
 
@@ -136,7 +139,7 @@
  */
 
 .single-content a {
-	-webkit-touch-callout:none;    /* Block menu on long press */
+	-webkit-touch-callout:none;
 	font-size:16px;
 	line-height:22px;	
 }
@@ -227,8 +230,7 @@
 }
 
 .single-content .content-image img {
-	max-width:100%;
-    width:100%;
+	width:100%;
 	height:auto;
 	display:block;
 }
@@ -261,4 +263,9 @@
 
 .single-template .post-publish-date {
 	font-size:12px;
+}
+
+/* Post Excerpt */
+.single-content .post-excerpt {
+
 }

@@ -1,0 +1,250 @@
+/**
+ * common.css : general rules (applied to all templates)
+ * custom.css : os specific rules (applied to all templates)
+ * post-detail.css : single.html and page.html specific rules
+ * post-list.css : archive.html specific rules
+ */
+
+
+/**
+ * Trigger screen repaint so that some Androids correctly adjust screen width
+ * when switching to landscape or portrait
+ */
+@media screen and (orientation: landscape){
+    .doesnt-exist { background:red; }
+}
+
+@media screen and (orientation: portrait){
+    .doesnt-exist { background:red; }
+}
+
+
+
+/**
+ * @desc Fonts
+ * @todo import only required fonts
+ */
+@font-face {
+	font-family : "Roboto-Regular";
+	src : url('../fonts/Roboto-Regular.ttf');
+}
+
+@font-face {
+	font-family : "Roboto-Medium";
+	src : url('../fonts/Roboto-Medium.ttf');
+}
+
+@font-face{
+	font-family : "Roboto-Bold";
+	src : url('../fonts/Roboto-Bold.ttf');
+}
+
+@font-face{
+	font-family : "Roboto-BoldItalic";
+	src : url('../fonts/Roboto-BoldItalic.ttf');
+}
+
+@font-face {
+	font-family : "Roboto-Light";
+	src : url('../fonts/Roboto-Light.ttf');
+}
+
+@font-face {
+	font-family : "Roboto-Black";
+	src : url('../fonts/Roboto-Black.ttf');
+}
+
+@font-face {
+	font-family : "Roboto-Thin";
+	src : url('../fonts/Roboto-Thin.ttf');
+}
+
+@font-face{
+	font-family : "Roboto-ThinItalic";
+	src : url('../fonts/Roboto-ThinItalic.ttf');
+}
+
+
+
+/**
+ * @desc General screen rules
+ */
+
+body {
+	background-color:#182C36;
+	font-family:Roboto-Regular, sans-serif;
+}
+
+
+
+/**
+ * @desc App's structure
+ */
+
+.header {
+	background-color:#666666;
+	border-bottom:2px #585858 solid;
+	box-shadow:0px 1px 1px #666666 ;
+}
+
+.tab-bar {
+	background-color:#F8F8F8;
+    -webkit-tap-highlight-color:rgba(0,0,0,0); /* No highlight when tabs are tapped */
+}
+
+
+
+/**
+ * @desc Header's elements
+ */
+
+.message {
+	background-color:#c74b46;
+	color:#ffffff;
+	border-bottom:1px #666666 solid;
+	box-shadow:0px 1px 1px #666666;
+	line-height:15px;
+}
+
+.refresh-off {
+	width:51px;
+	height:51px;
+	background-image:url('../img/refresh-off-icon.svg');
+}
+
+.refresh-on {
+	width:51px;
+	height:51px;
+	background-image:url('../img/refresh-on-icon.svg');
+}
+
+.header h1 {
+	color:#ffffff;
+}
+
+
+
+/**
+ * @desc Post list
+ */
+
+.list-template .list-title {
+	font-family:Roboto-Medium,sans-serif;
+}
+
+.list-template .content-date {
+	font-family:Roboto-Light,sans-serif;
+}
+
+.list-template h2 {
+	font-family:Roboto-Medium,sans-serif;
+}
+
+
+
+/**
+ * @desc Post/page detail
+ */
+
+.single-template {
+	font-family:Roboto-Light,sans-serif;
+}
+
+.single-template h1 {
+	font-family:Roboto-Medium,sans-serif;
+}
+
+.single-template .post-excerpt {
+	font-family:Roboto-Bold,sans-serif;
+}
+
+.single-content h2 {
+	font-family:Roboto-Medium,sans-serif;
+}
+
+.single-content h3 {
+	font-family:Roboto-Medium,sans-serif;
+}
+
+.single-content h4 {
+	font-family:Roboto-Medium,sans-serif;
+}
+
+.single-content h5, .single-content h6 {
+	font-family:Roboto-Bold,sans-serif;
+}
+
+.single-content h5:after, .single-content h6:after {
+	font-family:Roboto-Bold,sans-serif;
+}
+
+.single-content strong {
+	font-family:Roboto-Bold,sans-serif;
+}
+
+.single-content em {
+	font-family:Roboto-ThinItalic,sans-serif;
+}
+
+.single-content em strong, .single-content strong em {
+	font-family:Roboto-BoldItalic,sans-serif;
+}
+
+.single-content a:link {
+	font-family:Roboto-Medium,sans-serif;
+}
+
+.single-content blockquote p {
+	font-family:Roboto-BoldItalic,sans-serif;
+}
+
+.single-template .post-author {
+	font-family:Roboto-Medium,sans-serif;
+}
+
+
+
+/**
+ * @desc Buttons
+ */
+
+.button-tap-on {
+	background-color:#33B5E5;
+}
+
+.button-tap-off {
+	background-color:transparent;
+}
+
+
+
+/**
+ * @desc Tabs
+ */
+
+.tab-off {
+    font-family:Roboto-Medium,sans-serif;
+    font-size:12px;
+    text-align:center;
+    vertical-align:middle;
+    text-decoration:none;
+    color:#666;
+    padding:0px 3px 0px 3px;
+}
+
+.tab-on {
+    font-family:Roboto-Medium,sans-serif;
+    font-size:12px;
+    text-align:center;
+    vertical-align:middle;
+    text-decoration:none;    
+    color:#0099cc;
+    border-bottom:5px #0099cc solid;
+    padding:5px 3px 0px 3px;
+}
+
+.tab-separator {
+    background-position:left center;
+    background-repeat:no-repeat;
+    background-image:url(../img/tab-separator.svg);
+}

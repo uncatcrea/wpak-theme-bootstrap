@@ -11,6 +11,7 @@
  * @desc General screen rules
  */
 
+
 * {box-sizing:border-box;}
 
 html,body {
@@ -56,15 +57,15 @@ body {
 .content {
     z-index:10;
 	background-color:#fff;
-	top:50px;
-    bottom:50px;
+	top:100px;
+    bottom:0px;
 }
 
 /* iOS Tab Bar, Android's Top Bar */
 .tab-bar {
     z-index:10;
     height:50px;
-    bottom:0;
+    top:50px;
     display:table;
     -webkit-user-select:none;      /* Block content selection */
 	-webkit-touch-callout:none;    /* Block menu on long press */
@@ -102,7 +103,6 @@ body {
 	-webkit-transition:opacity 0.2s linear;
 }
 
-
 /* Refresh icon */
 .refresh-off {
 	position:absolute;
@@ -117,27 +117,26 @@ body {
 	right:0px;
 	background-repeat:no-repeat;
 	background-position:center;	
-	-webkit-animation:refresh-effect 1s infinite;
+	-webkit-animation: refresh-effect 1s infinite;
 }
 
 /* Rotation effect used to animate the refresh icon */
 @-webkit-keyframes refresh-effect {
-	100% {-webkit-transform:rotate(360deg);}
+	100%	{-webkit-transform: rotate(360deg);}
 }
 
 /* App's title */
 .header h1 {
-	height:50px;
 	margin:0;
 	padding:1px 50px 0px 50px;
 	text-align:center;
-	font-size:18px;
-	font-weight:normal;
 	line-height:50px;
-	-webkit-user-select:none; /* Block selection with a long touch */
 	overflow:hidden;
+	height:50px;
+	font-weight:normal;
+	-webkit-user-select:none; /* Block selection with a long touch */
+	font-size:18px;
 }
-
 
 /**
  * @desc Tab Bar
