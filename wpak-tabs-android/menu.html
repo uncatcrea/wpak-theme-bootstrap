@@ -4,11 +4,11 @@
         var menu_items = TemplateTags.getMenuItems();
         var menu_item_id = "";
         var menu_item_rank = 0;
-        
-        if(menu_items.length){ 
     %>
+     
+    <% if(menu_items.length){ %>
     
-        <% for (tabOrder=0;tabOrder<5;tabOrder++) { %>
+        <% for (tabOrder=0;tabOrder < Math.min(5, menu_items.length);tabOrder++) { %>
 
             <%
                
