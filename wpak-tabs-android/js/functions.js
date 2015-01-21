@@ -12,7 +12,7 @@
  * (AMD) Local Storage   available as    Storage
  * (AMD) Template Tags   avaialble as    TplTags
  */
-define(['jquery','core/theme-app','core/lib/storage','core/theme-tpl-tags'],function($,App,Storage,TplTags){
+define(['jquery','core/theme-app','core/modules/storage','core/theme-tpl-tags'],function($,App,Storage,TplTags){
 
 	/**
      * App Events
