@@ -119,6 +119,9 @@ define( [ 'jquery', 'core/theme-app', 'theme/js/bootstrap.min' ], function( $, A
 			e.preventDefault();
 			WpakNote.closeBox();
 		});
+	},
+	function(error){
+		//Nothing. Just so that requireJS doesn't throw an error to the browser console.
 	});
 	
 });
