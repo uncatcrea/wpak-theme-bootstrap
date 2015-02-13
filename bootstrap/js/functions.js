@@ -86,7 +86,7 @@ define( [ 'jquery', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/stora
 	/**
 	 * Open all links inside single content with the inAppBrowser
 	 */
-	$( "#container" ).on( "click", "#single a, .page-content", function( e ) {
+	$( "#container" ).on( "click", ".single-content a, .page-content a", function( e ) {
 		e.preventDefault();
 		openWithInAppBrowser( e.target.href );
 	} );
