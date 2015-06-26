@@ -1,8 +1,8 @@
 <div id="single" class="post-<%= post.id %>">
 	<h1><%= post.title %></h1>
-	<% if( TemplateTags.isComponentTypeLoaded( 'favorites' ) ) { %>
-		<a class="favorite remove <%= TemplateTags.isFavorite( post.id ) ? '' : 'hidden' %>" <%= TemplateTags.getPostDataAttributes( post.id ) %> href="#">Remove from favorites</a>
-		<a class="favorite add <%= TemplateTags.isFavorite( post.id ) ? 'hidden' : '' %>" <%= TemplateTags.getPostDataAttributes( post.id ) %> href="#">Add to favorites</a>
+	<% if( TemplateTags.addonIsActive( 'wpak-addon-favorites' ) && TemplateTags.isComponentTypeLoaded( 'favorites' ) ) { %>
+		<a class="favorite remove <%= WpakFavorites.isFavorite( post.id ) ? '' : 'hidden' %>" <%= TemplateTags.getPostDataAttributes( post.id ) %> href="#">Remove from favorites</a>
+		<a class="favorite add <%= WpakFavorites.isFavorite( post.id ) ? 'hidden' : '' %>" <%= TemplateTags.getPostDataAttributes( post.id ) %> href="#">Add to favorites</a>
 	<% } %>
 	<%= TemplateTags.formatDate(post.date,'d/m/Y') %>
 	<% if( post.nb_comments > 0 ){ %>

@@ -15,6 +15,11 @@
 
 				<li class="media post-<%= post.id %>">
 
+					<% if( TemplateTags.addonIsActive( 'wpak-addon-favorites' ) && TemplateTags.isComponentTypeLoaded( 'favorites' ) ) { %>
+						<a class="favorite remove <%= WpakFavorites.isFavorite( post.id ) ? '' : 'hidden' %>" <%= TemplateTags.getPostDataAttributes( post.id ) %> href="#">Remove from favorites</a>
+						<a class="favorite add <%= WpakFavorites.isFavorite( post.id ) ? 'hidden' : '' %>" <%= TemplateTags.getPostDataAttributes( post.id ) %> href="#">Add to favorites</a>
+					<% } %>
+
 					<% if( post.thumbnail.src && post.thumbnail.src.length ){ %>
 						<img class="media-object pull-left" style="width: 87px; height: 58px;" src="<%= post.thumbnail.src %>">
 					<% } %>

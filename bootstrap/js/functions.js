@@ -1,4 +1,4 @@
-define( [ 'jquery', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/storage', 'theme/js/bootstrap.min', 'theme/js/wp-appkit-note-addon' ], function( $, App, TemplateTags, Storage ) {
+define( [ 'jquery', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/storage', 'core/addons', 'theme/js/bootstrap.min', 'theme/js/wp-appkit-note-addon' ], function( $, App, TemplateTags, Storage, Addons ) {
 
 	/**
 	 * Launch app contents refresh when clicking the refresh button :
@@ -67,15 +67,6 @@ define( [ 'jquery', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/stora
 	} );
 
 	/**
-	 * Allow to click anywhere on post list <li> to go to post detail :
-	 */
-	$( '#container' ).on( 'click', 'li.media', function( e ) {
-		e.preventDefault();
-		var navigate_to = $( 'a', this ).attr( 'href' );
-		App.navigate( navigate_to );
-	} );
-
-	/**
 	 * Close menu when we click a link inside it.
 	 * The menu can be dynamically refreshed, so we use "on" on parent div (which is always here):
 	 */
@@ -86,7 +77,7 @@ define( [ 'jquery', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/stora
 	/**
 	 * Open all links inside single content with the inAppBrowser
 	 */
-	$( "#container" ).on( "click", ".single-content a, .page-content a", function( e ) {
+	$( "#container" ).on( "click", "#single a, .page-content", function( e ) {
 		e.preventDefault();
 		openWithInAppBrowser( e.target.href );
 	} );
@@ -136,60 +127,13 @@ define( [ 'jquery', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/stora
 	} );
 
 	/**
-	 * Toggle the display for both 'add' and 'remove' favorites links.
-	 * Called after a post has been added or removed to favorites list, so that the user can have a visual feedback.
-	 *
-	 * @param 	bool 	saved 		True or false whether the favorites list update has been made or not.
-	 * @param 	int 	post_id 	ID of the post that has been added or removed from the favorites list.
-	 */
-	function toggleFavoriteLinks( saved, post_id ) {
-		if ( saved ) {
-			if ( TemplateTags.isFavorite( post_id ) ) {
-				$( '.post-' + post_id + ' .favorite.add' ).addClass( 'hidden' );
-				$( '.post-' + post_id + ' .favorite.remove' ).removeClass( 'hidden' );
-			}
-			else {
-				$( '.post-' + post_id + ' .favorite.remove' ).addClass( 'hidden' );
-				$( '.post-' + post_id + ' .favorite.add' ).removeClass( 'hidden' );
-			}
-		}
-	}
-
-	/**
-	 * Add/Remove from favorites buttons
-	 */
-	$( '#container' ).on( 'click', '.favorite', function( e ) {
-		e.preventDefault();
-		var $link = $( this );
-		var id = $link.data( 'id' );
-		var global = $link.data( 'global' );
-
-		if ( TemplateTags.isFavorite( id ) ) {
-			App.removeFromFavorites( id, toggleFavoriteLinks );
-		}
-		else {
-			App.addToFavorites( id, toggleFavoriteLinks, global );
-		}
-	} );
-
-	/**
-	 * Reset favorites button
-	 */
-	$( '#container' ).on( 'click', '.favorite-reset', function( e ) {
-		e.preventDefault();
-		App.resetFavorites( function() {
-			// @TODO: Refresh the archive view, but how?
-		} );
-	} );
-
-	/**
 	 * Example of how to react to network state changes :
 	 */
 	/*
 	 App.on( 'network:online', function(event) {
 	 $( '#feedback' ).removeClass( 'error' ).html( "Internet connexion ok :)" ).slideDown();
 	 } );
-	 
+
 	 App.on( 'network:offline', function(event) {
 	 $( '#feedback' ).addClass( 'error' ).html( "Internet connexion lost :(" ).slideDown();
 	 } );
@@ -217,6 +161,64 @@ define( [ 'jquery', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/stora
 	 */
 	function openWithInAppBrowser( url ) {
 		window.open( url, "_blank", "location=yes" );
+	}
+
+	//
+	// Addon specific requirements: don't include an addon file if it hasn't been activated for the current app
+	//  1. check whether the addon is active or not
+	//  2. require the addon module
+	//  3. use this module to enhance the current theme with a feature provided by the addon
+	//
+
+	if( Addons.isActive( 'wpak-addon-favorites' ) ) {
+		require( [ 'addons/wpak-addon-favorites/js/wpak-favorites' ], function( WpakFavorites ) {
+			/**
+			 * Toggle the display for both 'add' and 'remove' favorites links.
+			 * Called after a post has been added or removed to favorites list, so that the user can have a visual feedback.
+			 *
+			 * @param 	bool 	saved 		True or false whether the favorites list update has been made or not.
+			 * @param 	int 	post_id 	ID of the post that has been added or removed from the favorites list.
+			 */
+			function toggleFavoriteLinks( saved, post_id ) {
+				if ( saved ) {
+					if ( WpakFavorites.isFavorite( post_id ) ) {
+						$( '.post-' + post_id + ' .favorite.add' ).addClass( 'hidden' );
+						$( '.post-' + post_id + ' .favorite.remove' ).removeClass( 'hidden' );
+					}
+					else {
+						$( '.post-' + post_id + ' .favorite.remove' ).addClass( 'hidden' );
+						$( '.post-' + post_id + ' .favorite.add' ).removeClass( 'hidden' );
+					}
+				}
+			}
+
+			/**
+			 * Add/Remove from favorites buttons
+			 */
+			$( '#container' ).on( 'click', '.favorite', function( e ) {
+				e.preventDefault();
+				var $link = $( this );
+				var id = $link.data( 'id' );
+				var global = $link.data( 'global' );
+
+				if ( WpakFavorites.isFavorite( id ) ) {
+					WpakFavorites.removeFromFavorites( id, toggleFavoriteLinks );
+				}
+				else {
+					WpakFavorites.addToFavorites( id, toggleFavoriteLinks, global );
+				}
+			} );
+
+			/**
+			 * Reset favorites button
+			 */
+			$( '#container' ).on( 'click', '.favorite-reset', function( e ) {
+				e.preventDefault();
+				WpakFavorites.resetFavorites( function() {
+					// @TODO: Refresh the archive view, but how?
+				} );
+			} );
+		});
 	}
 
 } );
