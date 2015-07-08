@@ -136,53 +136,6 @@ define( [ 'jquery', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/stora
 	} );
 
 	/**
-	 * Toggle the display for both 'add' and 'remove' favorites links.
-	 * Called after a post has been added or removed to favorites list, so that the user can have a visual feedback.
-	 *
-	 * @param 	bool 	saved 		True or false whether the favorites list update has been made or not.
-	 * @param 	int 	post_id 	ID of the post that has been added or removed from the favorites list.
-	 */
-	function toggleFavoriteLinks( saved, post_id ) {
-		if ( saved ) {
-			if ( TemplateTags.isFavorite( post_id ) ) {
-				$( '.post-' + post_id + ' .favorite.add' ).addClass( 'hidden' );
-				$( '.post-' + post_id + ' .favorite.remove' ).removeClass( 'hidden' );
-			}
-			else {
-				$( '.post-' + post_id + ' .favorite.remove' ).addClass( 'hidden' );
-				$( '.post-' + post_id + ' .favorite.add' ).removeClass( 'hidden' );
-			}
-		}
-	}
-
-	/**
-	 * Add/Remove from favorites buttons
-	 */
-	$( '#container' ).on( 'click', '.favorite', function( e ) {
-		e.preventDefault();
-		var $link = $( this );
-		var id = $link.data( 'id' );
-		var global = $link.data( 'global' );
-
-		if ( TemplateTags.isFavorite( id ) ) {
-			App.removeFromFavorites( id, toggleFavoriteLinks );
-		}
-		else {
-			App.addToFavorites( id, toggleFavoriteLinks, global );
-		}
-	} );
-
-	/**
-	 * Reset favorites button
-	 */
-	$( '#container' ).on( 'click', '.favorite-reset', function( e ) {
-		e.preventDefault();
-		App.resetFavorites( function() {
-			// @TODO: Refresh the archive view, but how?
-		} );
-	} );
-
-	/**
 	 * Example of how to react to network state changes :
 	 */
 	/*
