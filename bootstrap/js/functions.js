@@ -1,4 +1,4 @@
-define( [ 'jquery', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/storage', 'theme/js/bootstrap.min', 'theme/js/login' ], function( $, App, TemplateTags, Storage ) {
+define( [ 'jquery', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/storage', 'theme/js/bootstrap.min', 'theme/js/auth/auth-pages', 'theme/js/auth/simple-login', 'theme/js/auth/premium-posts' ], function( $, App, TemplateTags, Storage ) {
 
 	/**
 	 * Launch app contents refresh when clicking the refresh button :
