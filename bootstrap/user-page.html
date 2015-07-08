@@ -1,6 +1,15 @@
 <div id="single" id="user-page">
 	<h1>User page</h1>
 	<div id="single-content">
-            
+            <strong>Login</strong> : <%= user.login %>
+            <br><br>
+            <strong>Role</strong> : <%= user.role %>
+            <br><br>
+            <strong>Capabilities</strong> :
+            <ul>
+                <% _.each( user.capabilities, function( capability ){ %>
+                    <li><%= capability %></li>
+                <% } ); %>
+            </ul>
 	</div>
 </div>

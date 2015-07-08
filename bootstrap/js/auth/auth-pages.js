@@ -35,6 +35,36 @@ define( [ 'jquery', 'core/theme-app', 'core/modules/authentication' ], function(
 		
 		return message;
 	} );
+	
+	App.filter( 'template-args', function( template_args, view_type, view_template ) {
+		if ( view_template == 'user-page' ) {
+			var current_user = Auth.getCurrentUser();
+			if ( current_user ) {
+				template_args.user = {
+					login: current_user.login,
+					role: current_user.permissions.roles.pop(),
+					capabilities: current_user.permissions.capabilities
+				};
+			}
+		}
+		return template_args;
+	} );
+	
+	App.filter( 'redirect', function( redirect, queried_screen ) {
+		
+		if ( queried_screen.item_id == 'user-page' ) {
+			
+			var user = Auth.getCurrentUser();
+			
+			if ( !user ) {
+				App.navigate( '#' );
+				redirect = true;
+			}
+			
+		}
+		
+		return redirect;
+	} );
 
 } );
 
