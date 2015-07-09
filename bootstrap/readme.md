@@ -1,6 +1,6 @@
 <!--
 Theme Name: Bootstrap demo theme
-Description: A WP AppKit demo theme using the Twitter Bootstrap front end framework
+Description: A WP AppKit demo theme using the Twitter Bootstrap front end framework (LOGIN FEATURE TEST)
 Version: 0.1
 Theme URI: https://github.com/uncatcrea/wp-appkit-themes
 Author: UncatCrea			
