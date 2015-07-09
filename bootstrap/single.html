@@ -9,5 +9,13 @@
 			<img src="<%= post.thumbnail.src %>" />
 		<% } %>
 		<%= post.content %>
+                <br>
+                <form id="comment-form">
+                    <div class="form-group">
+                        <label for="comment-content">Comment this post</label> 
+                        <textarea id="comment-content" name="comment" cols="45" rows="8" class="form-control" ></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-info">Submit comment</button>
+                </form>
 	</div>
 </div>
