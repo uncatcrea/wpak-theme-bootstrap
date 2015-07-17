@@ -193,6 +193,21 @@ define( [ 'jquery', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/stora
 			}
 
 			/**
+			 * Remove a favorite post from the DOM.
+			 * Called after a post has been removed from favorites list, so that the user can have a visual feedback.
+			 *
+			 * @param 	bool 	saved 		True or false whether the favorites list update has been made or not.
+			 * @param 	int 	post_id 	ID of the post that has been removed from the favorites list.
+			 */
+			function removeFavorite( saved, post_id ) {
+				if( !saved ) {
+					return;
+				}
+
+				$( '.post-' + post_id ).remove();
+			}
+
+			/**
 			 * Add/Remove from favorites buttons
 			 */
 			$( '#container' ).on( 'click', '.favorite', function( e ) {
@@ -202,7 +217,19 @@ define( [ 'jquery', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/stora
 				var global = $link.data( 'global' );
 
 				if ( WpakFavorites.isFavorite( id ) ) {
-					WpakFavorites.removeFromFavorites( id, toggleFavoriteLinks );
+					var current_screen = TemplateTags.getCurrentScreen();
+					var callback = toggleFavoriteLinks;
+
+					// Uncomment the following lines if you want to directly hide the post from the favorites list when clicking "Remove from favorite" link
+
+					// if( current_screen.component_id.length ) {
+					// 	var component = TemplateTags.getComponent( current_screen.component_id );
+					// 	if( 'favorites' === component.type ) {
+					// 		callback = removeFavorite;
+					// 	}
+					// }
+
+					WpakFavorites.removeFromFavorites( id, callback );
 				}
 				else {
 					WpakFavorites.addToFavorites( id, toggleFavoriteLinks, global );
