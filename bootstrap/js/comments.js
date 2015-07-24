@@ -15,6 +15,24 @@ define( [ 'jquery', 'core/theme-app', 'core/modules/comments' ], function( $, Ap
 			}
 		);
 	} );
+	
+	App.filter( 'theme-event-message', function( message, event_data ) {
+		
+		if ( event_data.subtype == 'comment-error' ) {
+				
+			switch ( event_data.event ) {
+				case 'comment:content-empty':
+					message = "Comment content is empty!";
+					break;
+				default:
+					message = "Comment error :(";
+					break;
+			}
+			
+		}
+		
+		return message;
+	} );
 			
 } );
 
