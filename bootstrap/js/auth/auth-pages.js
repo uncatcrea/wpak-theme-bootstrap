@@ -12,18 +12,18 @@ define( [ 'jquery', 'core/theme-app', 'core/modules/authentication' ], function(
 		);
 	} );
 	
-	App.filter( 'theme-event-message', function( message, event, event_data ) {
+	App.filter( 'theme-event-message', function( message, event_data ) {
 		
-		if ( event == 'error:auth:login-error' ) {
-			
-			switch ( event_data.data ) {
-				case 'empty-user':
+		if ( event_data.subtype == 'authentication-error' ) {
+				
+			switch ( event_data.event ) {
+				case 'auth:empty-user':
 					message = "User login is empty";
 					break;
-				case 'wrong-user':
+				case 'auth:wrong-user':
 					message = "User not found";
 					break;
-				case 'wrong-pass':
+				case 'auth:wrong-pass':
 					message = "User name and password do not match";
 					break;
 				default:
