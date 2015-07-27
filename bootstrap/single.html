@@ -1,21 +1,14 @@
 <div id="single" class="post-<%= post.id %>">
-	<h1><%= post.title %></h1>
-	<%= TemplateTags.formatDate(post.date,'d/m/Y') %>
-	<% if( post.nb_comments > 0 ){ %>
-		- <a class="comments" href="<%= TemplateTags.getCommentsLink(post.id) %>"><% print(post.nb_comments) %>&nbsp;comment<% post.nb_comments > 1 ? print('s') : '' %></a>
-	<% } %>
-	<div id="single-content">
-		<% if(  post.thumbnail && post.thumbnail.src && post.thumbnail.src.length ){ %>
-			<img src="<%= post.thumbnail.src %>" />
-		<% } %>
-		<%= post.content %>
-                <br>
-                <form id="comment-form">
-                    <div class="form-group">
-                        <label for="comment-content">Comment this post</label> 
-                        <textarea id="comment-content" name="comment" cols="45" rows="8" class="form-control" ></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-info">Submit comment</button>
-                </form>
-	</div>
+    <h1><%= post.title %></h1>
+    <%= TemplateTags.formatDate(post.date,'d/m/Y') %>
+    <% if( post.nb_comments > 0 ){ %>
+            - <a class="comments" href="<%= TemplateTags.getCommentsLink(post.id) %>"><% print(post.nb_comments) %>&nbsp;comment<% post.nb_comments > 1 ? print('s') : '' %></a>
+    <% } %>
+    - <a class="comments" href="<%= TemplateTags.getCommentsLink(post.id) %>">Comment this post</a>
+    <div id="single-content">
+        <% if(  post.thumbnail && post.thumbnail.src && post.thumbnail.src.length ){ %>
+                <img src="<%= post.thumbnail.src %>" />
+        <% } %>
+        <%= post.content %>
+    </div>
 </div>
