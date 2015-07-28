@@ -1,4 +1,4 @@
-define( [ 'jquery', 'core/theme-app', 'core/modules/comments' ], function( $, App, Comments ) {
+define( [ 'jquery', 'core/theme-app', 'core/modules/comments', 'core/modules/authentication' ], function( $, App, Comments, Auth ) {
 
 	$( '#app-content-wrapper' ).on( 'submit', '#comment-form', function( e ) {
 		e.preventDefault();
@@ -65,6 +65,27 @@ define( [ 'jquery', 'core/theme-app', 'core/modules/comments' ], function( $, Ap
 		}
 		
 		return message;
+	} );
+	
+	/**
+	 * We don't want to display an error when the user connection expired,
+	 * because the "connection expiration" information is already handled
+	 * via App.on( 'info' ) in auth/simple-login.js
+	 */
+	App.filter( 'stop-theme-event', function( stop, event_data ) {
+		
+		if ( event_data.subtype == 'comment-error' ) {
+				
+			switch ( event_data.event ) {
+				case 'comment:user-connection-expired':
+				case 'comment:user-not-authenticated':
+					stop = true;
+					break;
+			}
+			
+		}
+		
+		return stop;
 	} );
 			
 } );

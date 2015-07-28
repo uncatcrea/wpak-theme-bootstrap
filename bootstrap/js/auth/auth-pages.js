@@ -4,6 +4,17 @@ define( [ 'jquery', 'core/theme-app', 'core/modules/authentication' ], function(
 	
 	App.addCustomRoute( 'login-page', 'login-page' ); 
 	
+	App.on( 'info:app-ready', function() {
+		Auth.checkUserAuthenticationFromRemote(
+			function( current_user ){
+				console.log('User connected', current_user);
+			},
+			function( error ){
+				console.log('User not connected', error);
+			}
+		);
+	} );
+	
 	$( '#app-content-wrapper' ).on( 'click', '#login-page button', function( e ) {
 		e.preventDefault();
 		Auth.logUserIn( 
@@ -64,6 +75,25 @@ define( [ 'jquery', 'core/theme-app', 'core/modules/authentication' ], function(
 		}
 		
 		return redirect;
+	} );
+	
+	App.on( 'info', function( info ) {
+		switch( info.event ) {
+			case 'auth:user-logout':
+				var message = '';
+				switch ( info.data.logout_type ) {
+					case 'user-connection-expired':
+						message = 'Your connection has expired. Please log in again!';
+						break;
+					case 'user-not-authenticated':
+						message = "Your connection has been reseted. Please log in again!";
+						break;
+				} 
+				if ( message ) {
+					$( '#feedback' ).removeClass( 'error' ).html( message ).slideDown();
+				}
+				break;
+		}
 	} );
 
 } );
