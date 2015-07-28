@@ -13,7 +13,7 @@ define( [ 'jquery', 'core/theme-app', 'core/modules/comments' ], function( $, Ap
 		
 		Comments.postComment( 
 			comment,
-			function( data ) {
+			function( comment_data ) {
 				//Comment created OK!
 				
 				//Reset submit button :
@@ -29,7 +29,8 @@ define( [ 'jquery', 'core/theme-app', 'core/modules/comments' ], function( $, Ap
 				window.scrollTo( 0, 0 );
 				
 				//Display a happiness message :
-				$( '#feedback' ).removeClass( 'error' ).html( 'Comment added successfully :)' ).slideDown();
+				var message = !comment_data.waiting_approval ? 'Comment added successfully :)' : 'Your comment is awaiting moderation';
+				$( '#feedback' ).removeClass( 'error' ).html( message ).slideDown();
 			},
 			function( error ) {
 				//Reset submit button :
