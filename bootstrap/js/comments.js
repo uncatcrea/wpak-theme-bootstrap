@@ -1,5 +1,22 @@
-define( [ 'jquery', 'core/theme-app', 'core/modules/comments', 'core/modules/authentication' ], function( $, App, Comments, Auth ) {
+define( [ 'jquery', 'core/theme-app', 'core/modules/comments' ], function( $, App, Comments ) {
 
+	/**
+	 * Theme module example that implements a post commenting feature.
+	 * 
+	 * The comment form HTML is in the comments.html template (form#comment-form).
+	 * 
+	 * Here we gather comment content and post ID from this comment form and
+	 * submit it to WP server using the WP-AppKit Comments API.
+	 */
+
+	/**
+	 * On comment form submit, we retrieve comment content and post ID from the
+	 * form and use Comments.postComment() to submit it to the server.
+	 * 
+	 * Internally, if the comment query is successful the new comment is automatically added
+	 * to the post comment list, so here we just have to rerender the comment screen,
+	 * to make the new comment appear in the comment list.
+	 */
 	$( '#app-content-wrapper' ).on( 'submit', '#comment-form', function( e ) {
 		e.preventDefault();
 		
@@ -25,7 +42,7 @@ define( [ 'jquery', 'core/theme-app', 'core/modules/comments', 'core/modules/aut
 				//Re-display current view (comments view) to display the new comment in the list :
 				App.rerenderCurrentScreen();
 				
-				//Scroll top : 
+				//Scroll top so that we can see the following feedback message: 
 				window.scrollTo( 0, 0 );
 				
 				//Display a happiness message :
@@ -36,7 +53,7 @@ define( [ 'jquery', 'core/theme-app', 'core/modules/comments', 'core/modules/aut
 				//Reset submit button :
 				$submit_button.removeAttr( 'disabled' ).text( 'Submit comment' );
 				
-				//Scroll top : 
+				//Scroll top so that we can see the feedback message that comes up through theme error handling. 
 				window.scrollTo( 0, 0 );
 				
 				//Nothing else here as we choosed to handle error messages via events :
@@ -46,6 +63,10 @@ define( [ 'jquery', 'core/theme-app', 'core/modules/comments', 'core/modules/aut
 
 	} );
 	
+	/**
+	 * Intercept error messages that are related to comments so that
+	 * we can display our custom messages when the comment posting fails.
+	 */
 	App.filter( 'theme-event-message', function( message, event_data ) {
 		
 		if ( event_data.subtype == 'comment-error' ) {
@@ -70,7 +91,9 @@ define( [ 'jquery', 'core/theme-app', 'core/modules/comments', 'core/modules/aut
 	/**
 	 * We don't want to display an error when the user connection expired,
 	 * because the "connection expiration" information is already handled
-	 * via App.on( 'info' ) in auth/simple-login.js
+	 * via App.on( 'info' ) in auth/simple-login.js.
+	 * 
+	 * So we stop those comment theme events from being trigerred :
 	 */
 	App.filter( 'stop-theme-event', function( stop, event_data ) {
 		
