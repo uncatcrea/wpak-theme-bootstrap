@@ -30,8 +30,8 @@ define( [ 'jquery', 'core/theme-app', 'core/modules/authentication' ], function(
 	$( $user_info ).on( 'click', '#login', function( e ) {
 		e.preventDefault();
 		$user_info.html( 
-			'<label for="userlogin">Login :&nbsp;</label><input id="userlogin" type="text" style="width:7em; margin-right:1em" >' +
-			'<label for="userpass">Password :&nbsp;</label><input id="userpass" type="password" style="width:7em; margin-right:1em" >' +
+			'<input id="userlogin" placeholder="Login" type="text" >' +
+			'<input id="userpass" placeholder="Password" type="password" >' +
 			'<button type="button" class="btn btn-info" id="go-login">Log in</button>'
 		);
 	} );

@@ -113,3 +113,9 @@ ol.breadcrumb{
 #theme-modal .modal-dialog{
     z-index: 1100;
 }
+
+#user-info input[type="text"],
+#user-info input[type="password"] {
+   width:7em; 
+   margin-right:1em;
+}
