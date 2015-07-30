@@ -37,16 +37,15 @@ If new to WP-AppKit, you might want to read this <a href="http://www.uncategoriz
 
 ##What's implemented
 
-At the moment, Wpak Off-Canvas themes implement:
+At the moment, Bootstrap theme implements:
 
-* Menu handled by Bootstrap
 * Archive template (eg. post list)
 * Infinite post list (A "Get more post" button at the bottom of post lists)
 * Single template (eg. a post)
 * Comments template (comment list for a post)
-* The content refresh process
+* Bootstrap's dropdown menu 
+* Content refresh process
 * Offline cache (meaning that you can read loaded posts offline)
-* Post thumbnails support
 * Back button
 * Responsive interface handled by Bootstrap
 
