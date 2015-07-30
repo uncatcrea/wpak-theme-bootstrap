@@ -11,6 +11,8 @@ Author URI: http://uncategorized-creations.com
 
 This WP-AppKit theme adds the "Offline Favorites" feature to the <a href="https://github.com/uncatcrea/wpak-theme-bootstrap">default Bootstrap theme</a>.
 
+*This theme is under development and is not fully functionnal yet!*
+
 ##Requires
 
 * WP-AppKit version >= 0.4
