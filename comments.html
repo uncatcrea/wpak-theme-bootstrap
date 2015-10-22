@@ -1,6 +1,6 @@
 <div id="post-comments-list">
 	<ol class="breadcrumb">
-		<li>Comments on <a href="<%= TemplateTags.getPostLink(post.id) %>"><%= post.title %></a></li>
+		<li>Comments on <a href="<%= TemplateTags.getPreviousScreenLink() %>"><%= post.title %></a></li>
 	</ol>
 	<% if(comments.length){ %>
 		  <ul class="media-list">
