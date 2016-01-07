@@ -96,13 +96,23 @@ define( [ 'jquery', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/stora
 	 */
 	$( '#container' ).on( 'click', '.get-more', function( e ) {
 		e.preventDefault();
-		$( this ).attr( 'disabled', 'disabled' ).text( 'Loading...' );
-		App.getMoreComponentItems( function() {
-			//If something is needed once items are retrieved, do it here.
-			//Note : if the "get more" link is included in the archive.html template (which is recommended),
-			//it will be automatically refreshed.
-			$( this ).removeAttr( 'disabled' );
-		} );
+
+		var $this = $( this );
+		
+		var text_memory = $this.text();
+		$this.attr( 'disabled', 'disabled' ).text( 'Loading...' );
+
+		App.getMoreComponentItems( 
+			function() {
+				//If something is needed once items are retrieved, do it here.
+				//Note : if the "get more" link is included in the archive.html template (which is recommended),
+				//it will be automatically refreshed.
+				$this.removeAttr( 'disabled' );
+			},
+			function( error, get_more_link_data ) {
+				$this.removeAttr( 'disabled' ).text( text_memory );
+			}
+		);
 	} );
 
 	/**
