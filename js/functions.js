@@ -1,4 +1,16 @@
-define( [ 'jquery', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/storage', 'theme/js/bootstrap.min' ], function( $, App, TemplateTags, Storage ) {
+define( [ 'jquery', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/storage','addons/wp-appkit-search/wpak-search', 
+	'theme/js/bootstrap.min' ], function( $, App, TemplateTags, Storage, WpakSearch ) {
+
+	App.on( 'screen:showed', function( current_screen, view ) {
+	
+		if ( WpakSearch.isSearchScreen( 'results' ) ) {
+			$('#search-go').click( function(e) {
+				e.preventDefault();
+				WpakSearch.search( { string: $('#search-input').val() } );
+			} );
+		}
+		
+	} );
 
 	/**
 	 * Launch app contents refresh when clicking the refresh button :
