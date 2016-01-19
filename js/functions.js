@@ -90,6 +90,26 @@ define( [ 'jquery', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/stora
 		e.preventDefault();
 		openWithInAppBrowser( e.target.href );
 	} );
+	
+	$( "#container" ).on( "click", ".comments", function( e ) {
+		e.preventDefault();
+		
+		//$('<span id="loading-comments">Loading comments...</span>').insertAfter($(this));
+		$('#waiting').show();
+		
+		App.displayPostComments( 
+			$(this).attr( 'data-post-id' ),
+			function( comments, post, item_global ) {
+				//Do something when comments display is ok
+				//We hide the waiting panel in 'screen:showed'
+			},
+			function( error ){
+				//Do something when comments display fail (note that an app error is triggered automatically)
+				$('#waiting').hide();
+				console.log('Comments display error', error );
+			}
+		);
+	} );
 
 	/**
 	 * "Get more" button in post lists
@@ -143,6 +163,11 @@ define( [ 'jquery', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/stora
 		} else {
 			scrollTop();
 		}
+		
+		if ( current_screen.screen_type == 'comments' ) {
+			$('#waiting').hide();
+		}
+		
 	} );
 
 	/**
