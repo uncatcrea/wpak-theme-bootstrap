@@ -105,7 +105,6 @@ define( [ 'jquery', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/stora
 			function( error ){
 				//Do something when comments display fail (note that an app error is triggered automatically)
 				$('#waiting').hide();
-				console.log('Comments display error', error );
 			}
 		);
 	} );
