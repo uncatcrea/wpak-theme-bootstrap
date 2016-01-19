@@ -94,7 +94,6 @@ define( [ 'jquery', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/stora
 	$( "#container" ).on( "click", ".comments", function( e ) {
 		e.preventDefault();
 		
-		//$('<span id="loading-comments">Loading comments...</span>').insertAfter($(this));
 		$('#waiting').show();
 		
 		App.displayPostComments( 
