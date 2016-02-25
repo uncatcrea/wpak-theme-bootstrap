@@ -2,9 +2,9 @@
     <h1><%= post.title %></h1>
     <%= TemplateTags.formatDate(post.date,'d/m/Y') %>
     <% if( post.nb_comments > 0 ){ %>
-            - <a class="comments" href="<%= TemplateTags.getCommentsLink(post.id) %>"><% print(post.nb_comments) %>&nbsp;comment<% post.nb_comments > 1 ? print('s') : '' %></a>
+            - <a class="comments" data-post-id="<%= post.id %>" href="#"><% print(post.nb_comments) %>&nbsp;comment<% post.nb_comments > 1 ? print('s') : '' %></a>
     <% } %>
-    - <a class="comments" href="<%= TemplateTags.getCommentsLink(post.id) %>">Comment this post</a>
+    - <a class="comments" data-post-id="<%= post.id %>" href="#">Comment this post</a>
     <div id="single-content">
         <% if(  post.thumbnail && post.thumbnail.src && post.thumbnail.src.length ){ %>
                 <img src="<%= post.thumbnail.src %>" />

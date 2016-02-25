@@ -1,10 +1,11 @@
 <!--
 Theme Name: Bootstrap - User Login demo theme
 Description: WP-AppKit demo theme to illustrate the User Login feature
-Version: 0.2
+Version: 0.3
 Theme URI: https://github.com/uncatcrea/wpak-bootstrap-themes/tree/feature-user-login
 Author: UncatCrea			
-Author URI: http://uncategorized-creations.com		
+Author URI: http://uncategorized-creations.com	
+WP-AppKit Version Required: >= 0.5	
 -->
 
 # Wpak Bootstrap Theme - User Login Feature Demo
@@ -27,5 +28,5 @@ This WP-AppKit theme adds the "User Login" and "Comment posting" features to the
 
 ##Requires
 
-* WP-AppKit version >= 0.4
+* WP-AppKit version >= 0.5
 * That a valid RSA private key is set for the app in WordPress Back Office, under the "Authentication Settings" section

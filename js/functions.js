@@ -4,10 +4,12 @@ define( [ 'jquery', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/stora
 		], 
 		function( $, App, TemplateTags, Storage ) {
 
+	var $refresh_button = $( '#refresh-button' );
+
 	/**
 	 * Launch app contents refresh when clicking the refresh button :
 	 */
-	$( '#refresh-button' ).click( function( e ) {
+	$refresh_button.click( function( e ) {
 		e.preventDefault();
 		closeMenu();
 		App.refresh();
@@ -17,7 +19,7 @@ define( [ 'jquery', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/stora
 	 * Animate refresh button when the app starts refreshing
 	 */
 	App.on( 'refresh:start', function() {
-		$( '#refresh-button' ).addClass( 'refreshing' );
+		$refresh_button.addClass( 'refreshing' );
 	} );
 
 	/**
@@ -37,7 +39,7 @@ define( [ 'jquery', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/stora
 	App.on( 'refresh:end', function( result ) {
 		scrollTop();
 		Storage.clear( 'scroll-pos' );
-		$( '#refresh-button' ).removeClass( 'refreshing' );
+		$refresh_button.removeClass( 'refreshing' );
 		if ( result.ok ) {
 			$( '#feedback' ).removeClass( 'error' ).html( 'Content updated successfully :)' ).slideDown();
 		} else {
@@ -60,14 +62,26 @@ define( [ 'jquery', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/stora
 	} );
 
 	/**
-	 * Automatically shows and hide Back button according to current screen
+	 * Back button 
 	 */
-	App.setAutoBackButton( $( '#go-back' ), function( back_button_showed ) {
-		if ( back_button_showed ) {
-			$( '#refresh-button' ).hide();
-		} else {
-			$( '#refresh-button' ).show();
+	var $back_button = $( '#go-back' );
+	
+	//Show/Hide back button (in place of refresh button) according to current screen:
+	App.on( 'screen:showed', function () {
+		var display = App.getBackButtonDisplay();
+		if ( display === 'show' ) {
+			$refresh_button.hide();
+			$back_button.show();
+		} else if ( display === 'hide' ) {
+			$back_button.hide();
+			$refresh_button.show();
 		}
+	} );
+
+	//Go to previous screen when clicking back button:
+	$back_button.click( function ( e ) {
+		e.preventDefault();
+		App.navigateToPreviousScreen();
 	} );
 
 	/**
@@ -95,18 +109,46 @@ define( [ 'jquery', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/stora
 		openWithInAppBrowser( e.target.href );
 	} );
 
+	$( "#container" ).on( "click", ".comments", function( e ) {
+		e.preventDefault();
+		
+		$('#waiting').show();
+		
+		App.displayPostComments( 
+			$(this).attr( 'data-post-id' ),
+			function( comments, post, item_global ) {
+				//Do something when comments display is ok
+				//We hide the waiting panel in 'screen:showed'
+			},
+			function( error ){
+				//Do something when comments display fail (note that an app error is triggered automatically)
+				$('#waiting').hide();
+			}
+		);
+	} );
+
 	/**
 	 * "Get more" button in post lists
 	 */
 	$( '#container' ).on( 'click', '.get-more', function( e ) {
 		e.preventDefault();
-		$( this ).attr( 'disabled', 'disabled' ).text( 'Loading...' );
-		App.getMoreComponentItems( function() {
-			//If something is needed once items are retrieved, do it here.
-			//Note : if the "get more" link is included in the archive.html template (which is recommended),
-			//it will be automatically refreshed.
-			$( this ).removeAttr( 'disabled' );
-		} );
+		
+		var $this = $( this );
+		
+		var text_memory = $this.text();
+		$this.attr( 'disabled', 'disabled' ).text( 'Loading...' );
+
+		App.getMoreComponentItems( 
+			function() {
+				//If something is needed once items are retrieved, do it here.
+				//Note : if the "get more" link is included in the archive.html template (which is recommended),
+				//it will be automatically refreshed.
+				$this.removeAttr( 'disabled' );
+			},
+			function( error, get_more_link_data ) {
+				$this.removeAttr( 'disabled' ).text( text_memory );
+			}
+		);
 	} );
 
 	/**
@@ -137,6 +179,11 @@ define( [ 'jquery', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/stora
 		} else {
 			scrollTop();
 		}
+		
+		if ( current_screen.screen_type == 'comments' ) {
+			$('#waiting').hide();
+		}
+		
 	} );
 
 	/**

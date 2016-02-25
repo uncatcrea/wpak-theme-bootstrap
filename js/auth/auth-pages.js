@@ -85,7 +85,7 @@ define( [ 'jquery', 'core/theme-app', 'core/modules/authentication' ], function(
 		switch( info.event ) {
 			case 'auth:user-logout':
 				var message = '';
-				switch ( info.data.logout_type ) {
+				switch ( info.core_data.logout_type ) {
 					case 'user-connection-expired':
 						message = 'Your connection has expired. Please log in again!';
 						break;
