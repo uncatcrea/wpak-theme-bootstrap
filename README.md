@@ -1,10 +1,11 @@
 <!--
 Theme Name: Bootstrap - Note addon demo theme
 Description: WP-AppKit demo theme to illustrate the "Note Addon"
-Version: 0.2
+Version: 0.3
 Theme URI: https://github.com/uncatcrea/wpak-bootstrap-themes/tree/feature-addon-note
 Author: UncatCrea			
-Author URI: http://uncategorized-creations.com		
+Author URI: http://uncategorized-creations.com	
+WP-AppKit Version Required: >= 0.5		
 -->
 
 # Wpak Bootstrap Theme - Note Addon Demo
@@ -15,4 +16,4 @@ This WP-AppKit theme adds the "App Notation" feature to the <a href="https://git
 
 ##Requires
 
-* WP-AppKit version >= 0.4
+* WP-AppKit version >= 0.5
