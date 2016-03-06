@@ -8,7 +8,7 @@ Author URI: http://uncategorized-creations.com
 WP-AppKit Version Required: >= 0.5	
 -->
 
-# Wpak Bootstrap Demo Theme
+# Wpak Bootstrap Demo Theme v0.3
 Bootstrap Demo Theme is a <a href="http://getwpappkit.com">WP-AppKit</a> theme based on the <a href="http://getbootstrap.com/">Bootstrap</a> Front End Framework.
 
 Its main purpose is to illustrate the different WP-AppKit features and how to implement them in a 
@@ -19,7 +19,7 @@ Specific WP-AppKit features implementation examples such as the "User Login" fea
 # Installation
 **WP-AppKit plugin install**
 
-* Download WP-AppKit: https://github.com/uncatcrea/wp-appkit
+* Download WP-AppKit: https://github.com/uncatcrea/wp-appkit (As of v0.3, Bootstrap theme requires WP-AppKit >= 0.5)
 * Install WP-AppKit as you would do for any other WordPress plugins (ie. drop the plugin folder in */wp-content/plugins*)
 * Activate WP-AppKit using the _Plugins_ WordPress admin panel. (Browse the *Installed Plugins* list and click the *Activate* link of WP-AppKit.)
 * Now you should have a brand new */wp-content/themes-wp-appkit* folder (yes, this is where app themes are stored)
