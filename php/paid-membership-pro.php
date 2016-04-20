@@ -14,9 +14,11 @@
  */
 function check_user_membership( $permissions_ok, $user_permissions, $user_id ) {
 	
+	$allowed_membership_level_id = 1; //ID of the Paid Membership Pro's membership required to see app content
+	
 	$user_membership = pmpro_getMembershipLevelForUser( $user_id );
 	
-	$permissions_ok = !empty( $user_membership ) && $user_membership->ID == 1;
+	$permissions_ok = !empty( $user_membership ) && $user_membership->ID == $allowed_membership_level_id;
 	
 	return $permissions_ok;
 }
