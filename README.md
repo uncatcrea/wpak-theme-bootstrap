@@ -1,6 +1,6 @@
 <!--
-Theme Name: Bootstrap - User Login demo theme
-Description: WP-AppKit demo theme to illustrate the User Login feature
+Theme Name: Bootstrap - Paid Membership Pro based User Login demo theme
+Description: WP-AppKit demo theme to illustrate the User Login feature based on Paid Membersip Pro plugin.
 Version: 0.3
 Theme URI: https://github.com/uncatcrea/wpak-bootstrap-themes/tree/feature-user-login
 Author: UncatCrea			
