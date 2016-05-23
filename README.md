@@ -1,14 +1,17 @@
 <!--
 Theme Name: Bootstrap demo theme
 Description: WP-AppKit demo theme using Bootstrap Front End Framework
-Version: 0.3
+Version: 0.3.1
 Theme URI: https://github.com/uncatcrea/wpak-bootstrap-themes
 Author: UncatCrea			
 Author URI: http://uncategorized-creations.com	
-WP-AppKit Version Required: >= 0.5	
+WP-AppKit Version Required: >= 0.5
+License: GPL-2.0+
+License URI: http://www.gnu.org/licenses/gpl-2.0.txt
+Copyright: 2013-2016 Uncategorized Creations	
 -->
 
-# Wpak Bootstrap Demo Theme v0.3
+# Wpak Bootstrap Demo Theme v0.3.1
 Bootstrap Demo Theme is a <a href="http://getwpappkit.com">WP-AppKit</a> theme based on the <a href="http://getbootstrap.com/">Bootstrap</a> Front End Framework.
 
 Its main purpose is to illustrate the different WP-AppKit features and how to implement them in a 
