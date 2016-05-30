@@ -3,6 +3,19 @@
 	<ol class="breadcrumb">
 		<li><%= list_title %><% total > 0 ? print(' - ' + total) : print(' - No') %> post<% total > 1 ? print('s') : '' %></li>
 	</ol>
+    
+        <!-- Search & Filter Form -->
+        <div id="filter-form">
+            <strong>Recherche</strong><br>
+            <input type="text" value="<%= current_search.search_string %>" id="search_string" placeholder="Mots à rechercher...">
+            <select id="categories">
+                <option value="">Choisir une catégorie</option>
+                <% _.each( categories, function( category ) { %>
+                    <option value="<%= category.slug %>" <% print( current_search.category_slug === category.slug ? 'selected' : '' ) %> ><%= category.name %></option>
+                <% } ); %>
+            </select>
+            <a href="#" id="go-filter">Rechercher!</a>
+        </div>
 	
 	<% if(posts.length){ %>
 	

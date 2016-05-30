@@ -113,3 +113,7 @@ ol.breadcrumb{
 #theme-modal .modal-dialog{
     z-index: 1100;
 }
+
+#filter-form {
+    padding:0 0 2em;
+}
