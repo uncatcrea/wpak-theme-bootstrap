@@ -29,7 +29,7 @@ define( [ 'jquery', 'core/theme-app', 'root/config' ], function( $, App, Config 
 	 * When subimitting search form, call the "Live Query" web service that
 	 * filters the current component's list according to current search params.
 	 */
-	$( '#container' ).on( 'click', '#go-filter', function( e ) {
+	$( '#app-layout' ).on( 'click', '#go-filter', function( e ) {
 		e.preventDefault();
 		
 		//Set search params from HTML form:
