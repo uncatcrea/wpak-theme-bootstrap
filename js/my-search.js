@@ -36,29 +36,18 @@ define( [ 'jquery', 'core/theme-app', 'root/config' ], function( $, App, Config 
 		current_search.search_string = $('#search_string').val().trim();
 		current_search.category_slug = $('#categories').val();
 		
-		//Get current component from current screen:
-		var current_scren = App.getCurrentScreen();
-		var current_component = current_scren.component_id;
-		
-		//Get updated data from server for this component:
-		App.liveQuery(
-			{
-				wpak_component_slug: current_component,
-				wpak_query_action: 'get-component'
+		//Get updated data from server for the current component:
+		App.refreshComponent({
+			success: function( answer, update_results ) {
+				//Server answered with a filtered list of posts. 
+				//Reload current screen to see the result:
+				App.reloadCurrentScreen();
 			},
-			{
-				type: 'replace-keep-global-items',
-				success: function( answer, update_results ) {
-					//Server answered with a filtered list of posts. 
-					//Reload current screen to see the result:
-					App.reloadCurrentScreen();
-				},
-				error: function( error ) {
-					//Maybe do something if filtering went wrong.
-					//Note that "No network" error events are triggered automatically by core
-				}
+			error: function( error ) {
+				//Maybe do something if filtering went wrong.
+				//Note that "No network" error events are triggered automatically by core
 			}
-		);
+		});
 
 	} );
 	
