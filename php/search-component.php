@@ -33,10 +33,10 @@ function search_component_query( $query_args, $component ) {
 
 		//Note : default WP ordering for searchs is : 
 		// ORDER BY wp_posts.post_title LIKE '%search_string%' DESC, wp_posts.post_date DESC 
-		//which is not compatible with the "Get more posts" feature that requires ordering by date.
-		//So to use the "Get more posts" feature we have to order by date.
-		//(if you don't require the "Get more posts" thing, or implement your own logic for this, 
-		// comment this line)
+		//which is not compatible with the default "Get more posts" feature that requires ordering by date.
+		//Note: As of WP-AppKit 0.6, if you want to keep WP Search ordering, you can use the 
+		//'use-standard-pagination' filter on app side (which will switch back to standard WP pagination),
+		//and comment the following line.
 		$query_args[ 'orderby' ] = 'date';
 		
 	}
