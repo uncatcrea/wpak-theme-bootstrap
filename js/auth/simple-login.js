@@ -31,7 +31,7 @@ define( [ 'jquery', 'core/theme-app', 'core/modules/authentication' ], function(
 			$user_info.html( 'Logged in as <a href="#user-page">'+ current_user.login +'</a> <button type="button" class="btn btn-danger" id="logout">Log out</button>');
 		} else { 
 			//User not logged in : display the login button :
-			$user_info.html( 'No user connected <button type="button" class="btn btn-info" id="login">Log in</button>' );
+			$user_info.html( '<button type="button" class="btn btn-info" id="login">Log in</button>' );
 		}
 		
 	};
