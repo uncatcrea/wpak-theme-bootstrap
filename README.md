@@ -5,7 +5,7 @@ Version: 0.3.1
 Theme URI: https://github.com/uncatcrea/wpak-bootstrap-themes
 Author: UncatCrea			
 Author URI: http://uncategorized-creations.com	
-WP-AppKit Version Required: >= 0.5
+WP-AppKit Version Required: >= 0.6
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 Copyright: 2013-2016 Uncategorized Creations	
