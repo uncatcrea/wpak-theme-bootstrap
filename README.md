@@ -1,5 +1,5 @@
 <!--
-Theme Name: Bootstrap demo theme
+Theme Name: Bootstrap demo theme - Search & Filter Example
 Description: WP-AppKit demo theme using Bootstrap Front End Framework
 Version: 0.3.1
 Theme URI: https://github.com/uncatcrea/wpak-bootstrap-themes
@@ -11,8 +11,8 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 Copyright: 2013-2016 Uncategorized Creations	
 -->
 
-# Wpak Bootstrap Demo Theme v0.3.1
-Bootstrap Demo Theme is a <a href="http://getwpappkit.com">WP-AppKit</a> theme based on the <a href="http://getbootstrap.com/">Bootstrap</a> Front End Framework.
+# Wpak Bootstrap Demo Theme v0.3.1 - Search & Filter Example
+Remote Search & Filter example based on the <a href="https://github.com/uncatcrea/wpak-theme-bootstrap">default Bootstrap theme</a>.
 
 Its main purpose is to illustrate the different WP-AppKit features and how to implement them in a 
 theme using the <a href="http://uncategorized-creations.com/wp-appkit/doc/">WP-AppKit Theme JS API</a>.
