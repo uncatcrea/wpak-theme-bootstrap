@@ -10,7 +10,7 @@ define( [ 'jquery', 'core/theme-app', 'root/config' ], function( $, App, Config 
 	 * "theme/js/my-search" to the "define" line of functions.js:
 	 * define( [..., 'theme/js/my-search'], function( ... ) 
 	 * 
-	 * This code rely on a HTML search form that is included in layout.html.
+	 * This code rely on a HTML search form that is included in archive.html.
 	 * 
 	 * To work, this code also needs the corresponding PHP code that
 	 * does the searching work on server side.
