@@ -1,8 +1,13 @@
 define( [ 'jquery', 'core/theme-app', 'root/config' ], function( $, App, Config ) {
 
 	/**
-	 * Basic search & filter on post lists.
-	 * Shows how to implement a search by string and category.
+	 * Basic (remote) search & filter on post lists.
+	 * Shows how to implement a search by string and category: search form displayed in 
+	 * archive template, and current screen refreshes whith search results when submitting form.
+	 * Can be applied to all app's archives or just to a custom archive template (linked to 
+	 * a corresponding "Latest posts" component for example) to implement a specific 
+	 * search screen in the app.
+	 * 
 	 * Replace "category/categories" by any custom taxonomy of yours to extend this code 
 	 * to your own content types.
 	 * 
@@ -10,7 +15,7 @@ define( [ 'jquery', 'core/theme-app', 'root/config' ], function( $, App, Config 
 	 * "theme/js/my-search" to the "define" line of functions.js:
 	 * define( [..., 'theme/js/my-search'], function( ... ) 
 	 * 
-	 * This code rely on a HTML search form that is included in layout.html.
+	 * This code rely on a HTML search form that is included in archive.html.
 	 * 
 	 * To work, this code also needs the corresponding PHP code that
 	 * does the searching work on server side.
@@ -26,7 +31,8 @@ define( [ 'jquery', 'core/theme-app', 'root/config' ], function( $, App, Config 
 	};
 
 	/**
-	 * When subimitting search form, call the "Live Query" web service that
+	 * When subimitting search form, call the "Live Query" web service
+	 * (automatically called through App.refreshComponent() ) that
 	 * filters the current component's list according to current search params.
 	 */
 	$( '#app-layout' ).on( 'click', '#go-filter', function( e ) {
