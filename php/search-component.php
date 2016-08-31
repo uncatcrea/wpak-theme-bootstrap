@@ -45,6 +45,29 @@ function search_component_query( $query_args, $component ) {
 }
 
 /**
+ * To know on app side if the component's query was a search or not, we add that
+ * info to the post list component's meta: we set a "is_seach" component meta as true if 
+ * the query is a search query.
+ * Then, on app side, you can pass that meta info to templates in "template-args" filter using something like:
+ * var current_component = App.getCurrentComponent();
+ * template_args.is_search = current_component.data.meta.is_search;
+ * (see js/my-search.js > "template-args")
+ */
+add_filter( 'wpak_posts_list_meta', 'add_search_info_to_webservice_answer' );
+function add_search_info_to_webservice_answer( $post_list_meta ) {
+	$my_search_filters = WpakWebServiceContext::getClientAppParam( 'my_search_filters' );
+	
+	/**
+	 * We consider that the post list query is a search if search fillters passed to
+	 * web service are not empty:
+	 */
+	$post_list_meta['is_search'] = !empty( $my_search_filters ) 
+								   && ( !empty( $my_search_filters[ 'search_string' ] ) || !empty( $my_search_filters[ 'category_slug' ] ) );
+	
+	return $post_list_meta;
+}
+
+/**
  * Add site's categories to app options (that are passed via the config.js file), 
  * so that the app can display the categories select in its search form.
  */

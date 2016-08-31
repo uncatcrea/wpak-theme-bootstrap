@@ -117,3 +117,7 @@ ol.breadcrumb{
 #filter-form {
     padding:0 0 2em;
 }
+
+.filter-result{
+    padding-top:0;
+}

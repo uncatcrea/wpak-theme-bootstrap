@@ -83,6 +83,9 @@ define( [ 'jquery', 'core/theme-app', 'root/config' ], function( $, App, Config 
 		if ( view_type === 'archive' ) {
 			template_args.current_search = current_search;
 			template_args.categories = Config.options.categories;
+			
+			var current_component = App.getCurrentComponent();
+			template_args.is_search = current_component.data.meta.is_search;
 		}
 		
 		return template_args;

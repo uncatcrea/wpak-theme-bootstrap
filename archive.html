@@ -6,17 +6,21 @@
     
         <!-- Search & Filter Form -->
         <div id="filter-form">
-            <strong>Recherche</strong><br>
-            <input type="text" value="<%= current_search.search_string %>" id="search_string" placeholder="Mots à rechercher...">
+            <strong>Search</strong><br>
+            <input type="text" value="<%= current_search.search_string %>" id="search_string" placeholder="Enter search string...">
             <select id="categories">
-                <option value="">Choisir une catégorie</option>
+                <option value="">Choose a category</option>
                 <% _.each( categories, function( category ) { %>
                     <option value="<%= category.slug %>" <% print( current_search.category_slug === category.slug ? 'selected' : '' ) %> ><%= category.name %></option>
-                <% } ); %>
+                <% } ); %>  
             </select>
-            <a href="#" id="go-filter">Rechercher!</a>
+            <a href="#" id="go-filter">Search!</a>
         </div>
-	
+        
+        <% if( is_search ){ %>
+                <strong>Search results:</strong><br><br>
+	<% } %>  
+        
 	<% if(posts.length){ %>
 	
 		<ul class="media-list">
@@ -51,6 +55,10 @@
 		<% } %>
 		
 	<% }else{ %>
+            <% if( is_search ){ %>
+                <p>No post found for this search!</p>
+            <% }else{ %>
 		<p>No post found!</p>
+            <% } %>    
 	<% } %>
 </div>
