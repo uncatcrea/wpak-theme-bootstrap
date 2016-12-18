@@ -18,7 +18,12 @@ function check_user_membership( $permissions_ok, $user_permissions, $user_id ) {
 	
 	$user_membership = pmpro_getMembershipLevelForUser( $user_id );
 	
-	$permissions_ok = !empty( $user_membership ) && $user_membership->ID == $allowed_membership_level_id;
+	$now = current_time( 'timestamp' );
+	
+	$permissions_ok = !empty( $user_membership ) 
+					  && $user_membership->ID == $allowed_membership_level_id
+					  && $user_membership->startdate <= $now
+					  && $user_membership->enddate >= $now;
 	
 	return $permissions_ok;
 }
