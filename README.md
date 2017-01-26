@@ -11,6 +11,10 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 Copyright: 2013-2016 Uncategorized Creations	
 -->
 
+# Wpak Bootstrap Demo Theme - Deeplink Test feature
+Implements a "Download post if not already in app" feature on top of the native WP-AppKit deeplinks management.
+**To test it, set the DEEPLINK_POSTS_COMPONENT_SLUG constant in js/deeplinks.js**
+
 # Wpak Bootstrap Demo Theme v0.3.1
 Bootstrap Demo Theme is a <a href="http://getwpappkit.com">WP-AppKit</a> theme based on the <a href="http://getbootstrap.com/">Bootstrap</a> Front End Framework.
 
