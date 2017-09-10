@@ -1,4 +1,4 @@
-<div id="single" class="post-<%= post.id %>">
+<div id="single" class="single-content post-<%= post.id %>">
     <h1><%= post.title %></h1>
     <%= TemplateTags.formatDate(post.date,'d/m/Y') %>
     <% if( post.nb_comments > 0 ){ %>
@@ -7,7 +7,7 @@
     - <a class="comments" data-post-id="<%= post.id %>" href="#">Comment this post</a>
     <div id="single-content">
         <% if(  post.thumbnail && post.thumbnail.src && post.thumbnail.src.length ){ %>
-                <img src="<%= post.thumbnail.src %>" />
+                <img src="<%= post.thumbnail.src %>" data-full-img="<%= post.thumbnail.src %>" data-width="<%= post.thumbnail.width %>" data-height="<%= post.thumbnail.height %>"/>
         <% } %>
         <%= post.content %>
     </div>
